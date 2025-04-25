@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import logo from "../assets/logo.svg";
 import "../styles/navbar-style.css";
 
 interface NavbarProps {
@@ -12,15 +13,21 @@ const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
   const location = useLocation();
 
   const navLinks = [
-    { path: "/projects", label: "Projects" },
-    { path: "/resume", label: "Resume" },
-    { path: "/blog", label: "Blog" },
-    { path: "/about", label: "About" },
+    { path: "/services", label: "Services" },
+    { path: "/markets", label: "Markets" },
+    { path: "/insights", label: "Insights" },
+    { path: "/how-we-do", label: "How We Do" },
+    { path: "/venturus", label: "Venturus" },
   ];
 
   return (
     <nav className="navbar">
       <ul className="list">
+        <div className="navbar-logo">
+          <Link to="/">
+            <img src={logo} alt="Logo" className="logo-image" />
+          </Link>
+        </div>
         {navLinks.map((link) => (
           <li key={link.path}>
             <Link
@@ -32,7 +39,6 @@ const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
           </li>
         ))}
       </ul>
-
       <div className="toolbar">
         <button onClick={toggleTheme} className="theme-button">
           {theme === "light" ? (

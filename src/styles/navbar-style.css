@@ -8,24 +8,38 @@
 
   .list {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     list-style: none;
     margin: var(--spacing-small);
     padding: 0;
 
+    .logo-image {
+      line-height: 0;
+      display: block;
+      height: 32px;
+      width: auto;
+      margin-right: var(--spacing-small);
+    }
+
     li {
-      border-right: 3px solid var(--primary-color);
+      display: flex;
+      align-items: center;
+      border-left: 3px solid var(--primary-color);
       padding-inline: var(--spacing-medium);
+
+      &:last-child {
+        border-right: 3px solid var(--primary-color);
+      }
 
       a {
         font-size: 1.25rem;
         color: var(--text);
         text-decoration: none;
-        position: relative;
         transition: color 0.2s ease-in-out;
 
         &:hover {
           color: var(--primary-color);
-          width: 100%;
         }
 
         &.active {
@@ -37,12 +51,12 @@
   }
 
   .theme-button {
+    display: flex;
+    align-items: center;
     background: none;
     border: none;
     cursor: pointer;
     color: var(--text);
-    display: flex;
-    align-items: center;
     margin: var(--spacing-small);
     padding: 0;
 
