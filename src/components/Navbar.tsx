@@ -7,11 +7,11 @@ const Navbar: FC = () => {
   const location = useLocation();
 
   const navLinks = [
-    { path: "/services", label: "Services" },
-    { path: "/markets", label: "Markets" },
-    { path: "/insights", label: "Insights" },
-    { path: "/how-we-do", label: "How We Do" },
-    { path: "/venturus", label: "Venturus" },
+    { path: "/services", label: "Serviços" },
+    { path: "/markets", label: "Mercados" },
+    // { path: "/insights", label: "Insights" },
+    { path: "/how-we-do", label: "Como nós fazemos" },
+    { path: "/venturus", label: "Quem somos nós" },
   ];
 
   return (

@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 import "./styles/app-style.css";
 import Navbar from "./components/Navbar";
-import Projects from "./pages/Project";
-import Resume from "./pages/Resume";
+// import Projects from "./pages/Project";
+// import Resume from "./pages/Resume";
 import About from "./pages/Home";
 import Blog from "./pages/Blog";
-import Post from "./pages/Post";
+// import Post from "./pages/Post";
 
 const App: FC = () => {
   return (

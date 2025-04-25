@@ -3,25 +3,26 @@
 /* ============================================= */
 :root {
   /* ---------- CORES BASE ---------- */
-  --background-rgb: 15, 10, 25;
+  --background-rgb: 22, 35, 20; /* verde-escuro de floresta */
   --background: rgb(var(--background-rgb));
-  --text: rgba(230, 220, 255, 0.95);
-  --text-secondary: rgba(200, 190, 255, 0.7);
+  --text: rgba(240, 244, 236, 0.95);          /* tom de folha clara */
+  --text-secondary: rgba(200, 210, 180, 0.7); /* musgo suave */
   
   /* ---------- CORES PRINCIPAIS ---------- */
-  --primary-color: #7d5bed;
-  --primary-dark: #5a3ec9;
-  --primary-light: #9d7dff;
+  --primary-color: #6B8E23; /* olive drab, campo de agronomia */
+  --primary-dark:   #556B2F; /* tom mais profundo de oliva */
+  --primary-light:  #98FB98; /* verde-pálido, brotos */
+  --accent-color: #2ECC71; /* verde vibrante para destaques e overlays em vídeo */
   
-  /* ---------- ELEMENTOS ESTELARES ---------- */
-  --star-glow: rgba(157, 125, 255, 0.4);
-  --star-twinkle: rgba(255, 255, 255, 0.8);
-  --constellation-line: 1px dashed rgba(125, 91, 237, 0.3);
+  /* ---------- ELEMENTOS ESTELARES (iluminação suave) ---------- */
+  --star-glow:         rgba(152, 251, 152, 0.4); /* brilho verde tenro */
+  --star-twinkle:      rgba(255, 255, 224, 0.8); /* luz amarelada suave */
+  --constellation-line:1px dashed rgba(107,142,35,0.3); /* linha de contorno suave */
   
   /* ---------- BOTÕES E INTERAÇÕES ---------- */
-  --button-bg: #2a1a5e;
-  --button-hover: #3d2a7a;
-  --button-active: #4f3a9e;
+  --button-bg:           #556B2F; /* fundo de botão sólido */
+  --button-hover:        #6B8E23; /* hover realçado em oliva */
+  --button-active:       #7FAF57; /* ativo em verde vivo */
   --button-hover-border: var(--primary-light);
   
   /* ---------- ESPAÇAMENTOS ---------- */
