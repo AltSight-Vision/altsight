@@ -2,8 +2,6 @@
 .App {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium);
-  margin: var(--spacing-medium);
   box-sizing: border-box;
   align-items: center;
   min-height: 100vh;
@@ -34,8 +32,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid var(--text);
-  border-radius: var(--spacing-small);
   width: 100%;
   box-sizing: border-box;
   background-color: rgba(var(--background-rgb), 0.85);
@@ -45,9 +41,9 @@
 }
 
 .App > .content {
-  width: 75%;
+  width: 100%;
   display: block;
-  padding: var(--spacing-medium);
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
 }

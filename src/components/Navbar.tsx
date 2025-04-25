@@ -1,15 +1,9 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
 import logo from "../assets/logo.svg";
 import "../styles/navbar-style.css";
 
-interface NavbarProps {
-  theme: "light" | "dark";
-  toggleTheme: () => void;
-}
-
-const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
+const Navbar: FC = () => {
   const location = useLocation();
 
   const navLinks = [
@@ -39,15 +33,6 @@ const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
           </li>
         ))}
       </ul>
-      <div className="toolbar">
-        <button onClick={toggleTheme} className="theme-button">
-          {theme === "light" ? (
-            <MdDarkMode size={24} />
-          ) : (
-            <MdLightMode size={24} />
-          )}
-        </button>
-      </div>
     </nav>
   );
 };
