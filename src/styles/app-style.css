@@ -1,0 +1,71 @@
+/* AppStyle.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  margin: var(--spacing-medium);
+  box-sizing: border-box;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--cosmic-bg);
+  position: relative;
+  color: var(--text);
+}
+
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--cosmic-overlay);
+  z-index: 0;
+  animation: twinkle 15s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.App > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid var(--text);
+  border-radius: var(--spacing-small);
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba(var(--background-rgb), 0.85);
+  backdrop-filter: blur(4px);
+  position: relative;
+  z-index: 1;
+}
+
+.App > .content {
+  width: 75%;
+  display: block;
+  padding: var(--spacing-medium);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .App > .content {
+    width: 100%;
+    padding: var(--spacing-small);
+    background-color: rgba(var(--background-rgb), 0.92);
+  }
+  
+  .App {
+    background-attachment: scroll;
+    margin: 0;
+    padding: var(--spacing-small);
+  }
+  
+  .App::before {
+    animation: none;
+  }
+}

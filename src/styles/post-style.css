@@ -1,0 +1,105 @@
+/* post-style.css */
+.post-container {
+  .post-content {
+    background-color: var(--background);
+    border-radius: 8px;
+    padding: var(--spacing-medium);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .post-header {
+      margin-bottom: var(--spacing-medium);
+      text-align: center;
+
+      .post-title {
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin-bottom: var(--spacing-small);
+        line-height: 1.2;
+      }
+
+      .post-meta {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-medium);
+
+        .post-date {
+          font-style: italic;
+        }
+      }
+    }
+
+    .post-body {
+      line-height: 1.6;
+      color: var(--text);
+      
+      h2, h3, h4 {
+        color: var(--primary-color);
+        margin-top: var(--spacing-medium);
+      }
+      
+      p {
+        margin-bottom: var(--spacing-medium);
+        text-align: justify;
+      }
+      
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin: var(--spacing-medium) auto;
+        display: block;
+      }
+      
+      code {
+        background-color: var(--code-background);
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+      
+      pre {
+        background-color: var(--code-background);
+        padding: var(--spacing-small);
+        border-radius: 4px;
+        overflow-x: auto;
+        
+        code {
+          background-color: transparent;
+          padding: 0;
+        }
+      }
+      
+      blockquote {
+        border-left: 3px solid var(--primary-color);
+        padding-left: var(--spacing-medium);
+        margin-left: 0;
+        color: var(--text-light);
+        font-style: italic;
+      }
+    }
+  }
+
+  .post-not-found {
+    text-align: center;
+    padding: var(--spacing-large);
+    
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    p {
+      color: var(--text);
+      font-size: 1.1rem;
+    }
+  }
+}

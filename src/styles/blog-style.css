@@ -1,0 +1,97 @@
+/* blog-style.css */
+.blog {
+  text-align: center;
+  margin: var(--spacing-medium);
+  flex-grow: 1;
+}
+
+.posts {
+  margin: var(--spacing-medium) 0;
+  padding: var(--spacing-medium);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.posts:nth-child(odd) {
+  border-left: 3px solid var(--primary-color);
+  padding-left: var(--spacing-medium);
+}
+
+.posts:nth-child(even) {
+  border-right: 3px solid var(--primary-color);
+  padding-right: var(--spacing-medium);
+}
+
+.posts h1 {
+  margin: 0 0 var(--spacing-medium);
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.post-item {
+  margin: var(--spacing-small) 0;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.post-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.post-link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: rgba(110, 195, 214, 0.1);
+  transform: scale(1.03);
+}
+
+.post-date {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 400;
+  padding: 2px 6px;
+  background: rgba(110, 195, 214, 0.1);
+  border-radius: 4px;
+}
+
+.post-description {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-top: 4px;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.loading {
+  text-align: center;
+  padding: var(--spacing-medium);
+}
+
+.error {
+  text-align: center;
+  padding: var(--spacing-medium);
+  color: var(--error-color);
+}
