@@ -1,4 +1,4 @@
-/* AppStyle.css */
+/* app-style.css */
 .App {
   display: flex;
   flex-direction: column;
@@ -46,22 +46,4 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .App > .content {
-    width: 100%;
-    padding: var(--spacing-small);
-    background-color: rgba(var(--background-rgb), 0.92);
-  }
-  
-  .App {
-    background-attachment: scroll;
-    margin: 0;
-    padding: var(--spacing-small);
-  }
-  
-  .App::before {
-    animation: none;
-  }
 }
