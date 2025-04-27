@@ -10,12 +10,12 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import "../styles/home-style.css";
 
 // Dados da empresa
-const companyStats = [
-  { value: "97%", label: "Precisão na detecção de pragas" },
-  { value: "40%+", label: "Redução no uso de defensivos" },
-  { value: "500+", label: "Fazendas atendidas" },
-  { value: "24/7", label: "Monitoramento contínuo" },
-];
+// const companyStats = [
+//   { value: "97%", label: "Precisão na detecção de pragas" },
+//   { value: "40%+", label: "Redução no uso de defensivos" },
+//   { value: "500+", label: "Fazendas atendidas" },
+//   { value: "24/7", label: "Monitoramento contínuo" },
+// ];
 
 const partners = [
   { name: "AgroBrasil", logo: agroBrasilLogo },
@@ -73,16 +73,16 @@ const features = [
     text: "Análise de imagens de drones e satélites para identificar pragas, doenças e déficit nutricional.",
     icon: "👁️",
   },
-  {
-    title: "Previsão Preditiva",
-    text: "Modelos que antecipam safras, necessidades de irrigação e riscos climáticos.",
-    icon: "🔮",
-  },
-  {
-    title: "Detecção de Estresse Hídrico",
-    text: "Monitoração contínua do nível de umidade do solo utilizando sensores IoT e visão computacional.",
-    icon: "💧",
-  },
+  // {
+  //   title: "Previsão Preditiva",
+  //   text: "Modelos que antecipam safras, necessidades de irrigação e riscos climáticos.",
+  //   icon: "🔮",
+  // },
+  // {
+  //   title: "Detecção de Estresse Hídrico",
+  //   text: "Monitoração contínua do nível de umidade do solo utilizando sensores IoT e visão computacional.",
+  //   icon: "💧",
+  // },
   {
     title: "Análise de Crescimento",
     text: "Time-lapse automatizado de plantações para avaliar taxas de crescimento e vigor.",
@@ -171,7 +171,7 @@ const Home: FC = () => {
         <VideoHero />
       </section>
 
-      <section className="section stats">
+      {/* <section className="section stats">
         <div className="stats-grid">
           {companyStats.map((stat, idx) => (
             <div key={idx} className="stat-card">
@@ -180,7 +180,7 @@ const Home: FC = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section className="section features">
         <h2 className="section-title">Nossas Tecnologias</h2>

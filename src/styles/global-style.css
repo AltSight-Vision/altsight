@@ -3,33 +3,38 @@
 /* ============================================= */
 :root {
   /* ---------- CORES BASE ---------- */
-  --background-rgb: 22, 35, 20; /* verde-escuro de floresta */
+  --background-white-rgb: 240, 250, 240; /* branco esverdeado */
+  --background-white: rgb(var(--background-white-rgb));
+  --background-rgb: 20, 40, 30; /* verde escuro profundo */
   --background: rgb(var(--background-rgb));
-  --text: rgba(240, 244, 236, 0.95);          /* tom de folha clara */
-  --text-secondary: rgba(200, 210, 180, 0.7); /* musgo suave */
-  
+  --background-gradient: linear-gradient(135deg, #14281E, #105744); /* para fundos com gradiente verde */
+  --text: rgba(240, 250, 240, 0.95);          /* quase branco, levemente esverdeado */
+  --text-secondary: rgba(200, 220, 200, 0.7); /* verde acinzentado para texto secundário */
+
   /* ---------- CORES PRINCIPAIS ---------- */
-  --primary-color: #6B8E23; /* olive drab, campo de agronomia */
-  --primary-dark:   #556B2F; /* tom mais profundo de oliva */
-  --primary-light:  #98FB98; /* verde-pálido, brotos */
-  --accent-color: #2ECC71; /* verde vibrante para destaques e overlays em vídeo */
-  
+  --primary-color: white; /* verde médio escuro */
+  --primary-dark:   #105744; /* verde bem escuro */
+  --primary-light:  white; /* verde claro para detalhes */
+  --accent-color: #3E8E63; /* verde vibrante para destaques */
+
   /* ---------- ELEMENTOS ESTELARES (iluminação suave) ---------- */
-  --star-glow:         rgba(152, 251, 152, 0.4); /* brilho verde tenro */
-  --star-twinkle:      rgba(255, 255, 224, 0.8); /* luz amarelada suave */
-  --constellation-line:1px dashed rgba(107,142,35,0.3); /* linha de contorno suave */
-  
+  --star-glow:         rgba(111, 191, 115, 0.4); /* brilho verde claro */
+  --star-twinkle:      rgba(210, 235, 210, 0.8); /* cintilação verdeada suave */
+  --constellation-line:1px dashed rgba(38, 92, 66, 0.3); /* linha de contorno verde escuro */
+
   /* ---------- BOTÕES E INTERAÇÕES ---------- */
-  --button-bg:           #556B2F; /* fundo de botão sólido */
-  --button-hover:        #6B8E23; /* hover realçado em oliva */
-  --button-active:       #7FAF57; /* ativo em verde vivo */
+  --button-bg:           #105744; /* fundo do botão no verde escuro */
+  --button-hover:        #127774; /* hover no verde médio */
+  --button-active:       ##1499A8; /* botão ativo em verde claro */
   --button-hover-border: var(--primary-light);
-  
+
   /* ---------- ESPAÇAMENTOS ---------- */
   --spacing-large: 40px;
   --spacing-medium: 20px;
   --spacing-small: 10px;
 }
+
+
 
 /* ============================================= */
 /*                ESTILOS BASE                   */

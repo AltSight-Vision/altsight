@@ -4,7 +4,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: var(--background);
+  background: var(--background-gradient);
+  padding: var(--spacing-medium);
 
   .list {
     display: flex;
@@ -17,7 +18,7 @@
     .logo-image {
       line-height: 0;
       display: block;
-      height: 32px;
+      height: 100px;
       width: auto;
       margin-right: var(--spacing-small);
     }
@@ -25,12 +26,12 @@
     li {
       display: flex;
       align-items: center;
-      border-left: 3px solid var(--primary-color);
+      /* border-left: 2px solid var(--primary-color); */
       padding-inline: var(--spacing-medium);
 
-      &:last-child {
-        border-right: 3px solid var(--primary-color);
-      }
+      /* &:last-child {
+        border-right: 2px solid var(--primary-color);
+      } */
 
       a {
         font-size: 1.25rem;

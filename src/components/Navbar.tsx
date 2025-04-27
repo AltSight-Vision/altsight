@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import logo from "../assets/alt_logo_name.svg";
 import "../styles/navbar-style.css";
 
 const Navbar: FC = () => {

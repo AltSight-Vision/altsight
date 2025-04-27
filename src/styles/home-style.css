@@ -56,7 +56,7 @@
 
   /* Features */
   .features {
-    background: var(--secondary-color);
+    background: var(--quaternary-color);
     color: var(--text);
     padding: var(--spacing-large) var(--spacing-medium);
 
@@ -79,7 +79,7 @@
     }
 
     .feature-card {
-      background: var(--background);
+      background: var(--background-gradient);
       padding: var(--spacing-medium);
       border-radius: 0.75rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -259,7 +259,7 @@
     }
   }
 
-  .stats {
+  /* .stats {
     padding: var(--spacing-medium);
 
     background: var(--primary-dark);
@@ -292,7 +292,7 @@
         }
       }
     }
-  }
+  } */
 
   /* Parceiros */
   .partners {
