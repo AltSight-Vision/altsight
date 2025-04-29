@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "altsight",
     "public": "dist",
     "ignore": [
       "firebase.json",
