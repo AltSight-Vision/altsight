@@ -1,13 +1,18 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/alt_logo_name.svg";
 import logoMobile from "../assets/logo-mobile.svg";
 import { FaBars, FaTimes } from "react-icons/fa";
-import "../styles/navbar-style.css";
+import "../styles/components/navbar-style.css";
 
 const Navbar: FC = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // trava o scroll do body quando o menu mobile está aberto
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+  }, [isMenuOpen]);
 
   const navLinks = [
     { path: "/services", label: "Serviços" },
@@ -30,8 +35,12 @@ const Navbar: FC = () => {
           </picture>
         </Link>
 
-        {/* Mobile Menu Button */}
-        <button className="mobile-menu-button" onClick={toggleMenu}>
+        <button
+          className="mobile-menu-button"
+          onClick={toggleMenu}
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMenuOpen}
+        >
           {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
@@ -49,8 +58,14 @@ const Navbar: FC = () => {
           ))}
         </ul>
       </div>
+      <div
+        className={`mobile-menu-overlay ${isMenuOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      />
     </nav>
   );
 };
 
 export default Navbar;
+
+
