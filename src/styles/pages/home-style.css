@@ -54,90 +54,6 @@
     }
   }
 
-  /* Features */
-  .features {
-    background: var(--quaternary-color);
-    color: var(--text);
-    padding: var(--spacing-large) var(--spacing-medium);
-
-    .section-title {
-      margin-bottom: var(--spacing-medium);
-      color: var(--primary-color);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-medium);
-
-      @media (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .feature-card {
-      background: var(--background-gradient);
-      padding: var(--spacing-medium);
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-      .feature-icon {
-        font-size: 2.5rem;
-        width: 60px;
-        height: 60px;
-        line-height: 60px;
-        margin: 0 auto var(--spacing-small);
-        border-radius: 50%;
-        background: var(--primary-color);
-        color: var(--background);
-        transition: background 0.3s ease, color 0.3s ease;
-      }
-      &:hover .feature-icon {
-        background: var(--accent-color);
-        color: #fff;
-      }
-
-      h3 {
-        margin-bottom: var(--spacing-small);
-        font-size: 1.25rem;
-        color: var(--primary-color);
-        transition: color 0.3s ease;
-      }
-      &:hover h3 {
-        color: var(--accent-color);
-      }
-
-      p {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: var(--text);
-      }
-    }
-  }
-  /* Destacar o primeiro cartão com um ícone accent e texto alinhado */
-.features-grid .feature-card:first-child .feature-icon {
-  background: var(--accent-color);
-  color: #fff;
-}
-.features-grid .feature-card:first-child h3 {
-  color: var(--accent-color);
-}
-.features-grid .feature-card:first-child p {
-  color: var(--text-secondary);
-}
-
-
   .cta {
     background: var(--quaternary-color);
     color: var(--text);
@@ -471,3 +387,4 @@
     }
   }
 }
+
