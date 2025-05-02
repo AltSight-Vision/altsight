@@ -7,7 +7,8 @@ import { testimonials } from "../data/home/testimonials";
 import { features } from "../data/home/features";
 
 import VideoHero from "../components/VideoHero";
-import "../styles/home-style.css";
+import "../styles/pages/home-style.css";
+import "../styles/components/features-style.css";
 
 const Home: FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -34,14 +35,38 @@ const Home: FC = () => {
         <VideoHero />
       </section>
 
+      {/* Seção para as funcionalidades */}
       <section className="section features">
+        {/* === BOLHAS ESQUERDA === */}
+        <span className="bubble bubble-l1" />
+        <span className="bubble bubble-l2" />
+        <span className="bubble bubble-l3" />
+        <span className="bubble bubble-l4" />
+        {/* === BOLHAS DIREITA === */}
+        <span className="bubble bubble-r1" />
+        <span className="bubble bubble-r2" />
+        <span className="bubble bubble-r3" />
+        <span className="bubble bubble-r4" />
+
         <h2 className="section-title">Nossas Tecnologias</h2>
         <div className="features-grid">
           {features.map((feat, idx) => (
-            <div key={idx} className="feature-card">
+            <div
+              key={idx}
+              className="feature-card"
+              style={{ "--i": idx } as React.CSSProperties}
+            >
               <div className="feature-icon">{feat.icon}</div>
               <h3>{feat.title}</h3>
               <p>{feat.text}</p>
+              <a
+                href={"/funcoes"+feat.link}
+                className="feature-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Saiba mais sobre
+              </a>
             </div>
           ))}
         </div>
