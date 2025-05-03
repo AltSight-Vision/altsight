@@ -5,6 +5,7 @@
   box-sizing: border-box;
   align-items: center;
   min-height: 100vh;
+  background: var(--cosmic-bg);
   position: relative;
   color: var(--text);
 }
@@ -16,6 +17,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  background: var(--cosmic-overlay);
   z-index: 0;
   animation: twinkle 15s infinite alternate;
 }
