@@ -2,42 +2,30 @@
 /*                VARIÁVEIS GLOBAIS              */
 /* ============================================= */
 :root {
-  /* ---------- CORES BASE ---------- */
-  --background-white-rgb: 240, 250, 240; /* branco esverdeado */
-  --background-white: rgb(var(--background-white-rgb));
-  --background-rgb: 20, 40, 30; /* verde escuro profundo */
-  --background: rgb(var(--background-rgb));
-  --background-gradient: linear-gradient(135deg, #14281E, #105744); /* para fundos com gradiente verde */
-  --text: rgba(240, 250, 240, 0.95);          /* quase branco, levemente esverdeado */
-  --text-secondary: rgba(200, 220, 200, 0.7); /* verde acinzentado para texto secundário */
+  /* ---------- BASE COLORS ---------- */
+  --background-gradient: linear-gradient(135deg, #14281E, #105744);
+  --background-light: #f0faf0; /* greenish white */
+  --background-dark: #183627; /* deep dark green */
 
-  /* ---------- CORES PRINCIPAIS ---------- */
-  --primary-color: white; /* verde médio escuro */
-  --primary-dark:   #105744; /* verde bem escuro */
-  --primary-light:  white; /* verde claro para detalhes */
-  --accent-color: #3E8E63; /* verde vibrante para destaques */
+  
+  /* ---------- TEXT COLORS ---------- */
+  --text-light: #ffffff;
+  --text-dark: #202020;
 
-  /* ---------- ELEMENTOS ESTELARES (iluminação suave) ---------- */
-  --star-glow:         rgba(111, 191, 115, 0.4); /* brilho verde claro */
-  --star-twinkle:      rgba(210, 235, 210, 0.8); /* cintilação verdeada suave */
-  --constellation-line:1px dashed rgba(38, 92, 66, 0.3); /* linha de contorno verde escuro */
+  /* ---------- PRIMARY COLORS ---------- */
+  --primary-color: #105744; /* medium dark green */
+  --accent-color: #2b9693; /* light green */
+  --secondary-color: #3E8E63; /* vibrant green */
 
-  /* ---------- BOTÕES E INTERAÇÕES ---------- */
-  --button-bg:           #105744; /* fundo do botão no verde escuro */
-  --button-hover:        #127774; /* hover no verde médio */
-  --button-active:       ##1499A8; /* botão ativo em verde claro */
-  --button-hover-border: var(--primary-light);
 
-  /* ---------- ESPAÇAMENTOS ---------- */
+  /* ---------- SPACING & LAYOUT ---------- */
   --spacing-large: 40px;
   --spacing-medium: 20px;
   --spacing-small: 10px;
-
   --mobile-breakpoint: 768px;
   --transition-speed: 0.3s;
+  --navbar-z-index: 1000;
 }
-
-
 
 /* ============================================= */
 /*                ESTILOS BASE                   */
@@ -47,18 +35,7 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  font-family: "Roboto", sans-serif;
-  color: var(--text);
-  line-height: 1.5;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  position: relative;
-  
-  /* Fundo Constelação */
-  background: 
-    radial-gradient(ellipse at center, 
-      rgba(45, 20, 80, 0.3) 0%, 
-      rgba(15, 10, 25, 1) 100%),
-    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237d5bed' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+  font-family: "Roboto", sans-serif;  
 }
 
 /* Efeito de brilho cósmico */
@@ -69,7 +46,6 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--cosmic-overlay);
   z-index: -1;
   animation: twinkle 15s infinite alternate;
 }
@@ -117,31 +93,6 @@ a {
 
 a:hover {
   color: var(--primary-color);
-}
-
-button {
-  border: 1px solid var(--text);
-  padding: 0.5em;
-  border-radius: 0.5em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--button-bg);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 8px var(--star-glow);
-}
-
-button:hover {
-  border-color: var(--button-hover-border);
-  box-shadow: 0 0 12px var(--primary-light), 
-              0 0 20px var(--star-glow);
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 /* ============================================= */
