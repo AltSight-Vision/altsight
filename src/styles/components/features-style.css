@@ -197,3 +197,13 @@
     transform: scale(1);
   }
 }
+/* Mobile Responsive */
+@media (max-width: 786px) {
+  .features-grid {
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-large);
+  }
+}
