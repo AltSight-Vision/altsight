@@ -31,12 +31,6 @@ export const features: Feature[] = [
     link: "#integracao-com-maquinas"
   },
   {
-    title: "Mapeamento de Solo",
-    text: "Geração de mapas de composição do solo e nutrientes com sensoriamento remoto.",
-    icon: "🗺️",
-    link: "#mapeamento-de-solo"
-  },
-  {
     title: "Alertas em Tempo Real",
     text: "Notificações instantâneas via app e SMS sobre eventos críticos na plantação.",
     icon: "📲",
