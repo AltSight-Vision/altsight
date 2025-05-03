@@ -2,31 +2,37 @@ import { FC, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/alt_logo_name.svg";
 import logoMobile from "../assets/logo-mobile.svg";
-import { FaBars, FaTimes } from "react-icons/fa";
 import "../styles/components/navbar-style.css";
 
 const Navbar: FC = () => {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // trava o scroll do body quando o menu mobile está aberto
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
-  }, [isMenuOpen]);
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    
+    // Initialize mobile state
+    handleResize();
+    
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const navLinks = [
-    { path: "/services", label: "Serviços" },
-    { path: "/markets", label: "Mercados" },
-    { path: "/how-we-do", label: "Como nós fazemos" },
-    { path: "/venturus", label: "Quem somos nós" },
+    { path: "/", label: "Início", hideOnMobile: true },
+    { path: "/inicio", label: "Serviços" },
+    { path: "/quemsomos", label: "Quem Somos" },
+    { path: "/nossaempresa", label: "Nossa Empresa" },
   ];
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
           <picture>
@@ -34,38 +40,25 @@ const Navbar: FC = () => {
             <img src={logo} alt="Logo" className="logo-image" />
           </picture>
         </Link>
-
-        <button
-          className="mobile-menu-button"
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
-
-        <ul className={`nav-list ${isMenuOpen ? "open" : ""}`}>
-          {navLinks.map((link) => (
-            <li key={link.path}>
-              <Link
-                to={link.path}
-                className={location.pathname === link.path ? "active" : ""}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="nav-list">
+          {navLinks.map((link) => {
+            if (isMobile && link.hideOnMobile) return null;
+            return (
+              <li key={link.path}>
+                <Link
+                  to={link.path}
+                  className={location.pathname === link.path ? "active" : ""}
+                >
+                  <span className="link-text">{link.label}</span>
+                  <span className="link-hover"></span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
-      <div
-        className={`mobile-menu-overlay ${isMenuOpen ? "open" : ""}`}
-        onClick={toggleMenu}
-      />
     </nav>
   );
 };
 
 export default Navbar;
-
-
