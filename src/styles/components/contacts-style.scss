@@ -1,0 +1,125 @@
+.contact {
+  background: var(--background-light);
+  padding: var(--spacing-xlarge) 0;
+
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 0 var(--spacing-medium);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+}
+
+.section {
+  &-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-large);
+    position: relative;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--accent-color);
+      margin-top: var(--spacing-small);
+    }
+  }
+}
+
+.info {
+  &-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-medium);
+  }
+
+  &-item {
+    margin-bottom: var(--spacing-medium);
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-bottom: var(--spacing-small);
+    }
+
+    p {
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+  }
+}
+
+.form {
+  &-group {
+    margin-bottom: var(--spacing-medium);
+  }
+
+  &-input,
+  &-textarea {
+    width: 100%;
+    padding: var(--spacing-small) 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+  }
+
+  &-textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  &-feedback {
+    margin-top: var(--spacing-small);
+    padding: var(--spacing-small);
+    border-radius: 4px;
+
+    &.success {
+      color: var(--success-color);
+      background-color: rgba(0, 200, 0, 0.1);
+    }
+
+    &.error {
+      color: var(--error-color);
+      background-color: rgba(200, 0, 0, 0.1);
+    }
+  }
+}
+
+.submit-button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: var(--spacing-small) var(--spacing-medium);
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: var(--accent-dark);
+  }
+
+  &:disabled {
+    background: var(--disabled-color);
+    cursor: not-allowed;
+  }
+}
