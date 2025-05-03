@@ -1,5 +1,6 @@
 import { FC, useRef, useState, useEffect } from "react";
 import heroVideo from "../assets/sections/drone-footage.mp4";
+import "../styles/components/video-hero-style.css";
 
 const VideoHero: FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
