@@ -1,38 +1,53 @@
 import { FC, useRef, useState, useEffect } from "react";
-import heroVideo from "../assets/sections/drone-footage.mp4";
+import heroVideo from "../assets/videos/drone-footage.mp4";
 import "../styles/components/video-hero-style.css";
 
-const VideoHero: FC = () => {
+interface VideoHeroProps {
+  companyName?: string;
+  tagline?: string;
+}
+
+const VideoHero: FC<VideoHeroProps> = ({
+  companyName = "AltSight Vision",
+  tagline = "Revolucionando a Agricultura com Visão Computacional",
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [containerHeight, setContainerHeight] = useState("70vh");
+  const [containerHeight, setContainerHeight] = useState<string>("70vh");
 
   useEffect(() => {
-    const updateHeight = () => {
+    const handleResize = () => {
       setContainerHeight(window.innerWidth < 768 ? "50vh" : "70vh");
     };
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
+    
+    // Set initial height
+    handleResize();
+    
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+    
+    // Cleanup function to remove event listener
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="hero-container" style={{ height: containerHeight }}>
+    <section className="hero-container" style={{ height: containerHeight }}>
       <div className="video-wrapper">
         <video
           ref={videoRef}
           className="responsive-video"
-          src="/videos/drone-footage.mp4"
+          src={heroVideo}
           autoPlay
           muted
           loop
           playsInline
+          aria-label="Drone footage of agricultural fields"
         />
       </div>
       <div className="hero-content">
-        <h1 className="name">AgroTech Solution</h1>
-        <h1>Revolucionando a Agricultura com Visão Computacional</h1>
+        <h1 className="company-name">{companyName}</h1>
+        <h2 className="company-tagline">{tagline}</h2>
       </div>
-    </div>
+    </section>
   );
 };
 

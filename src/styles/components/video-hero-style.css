@@ -5,7 +5,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: black;
+  background-color: var(--color-black, #000);
+
   .video-wrapper {
     width: 100%;
     margin: 0 auto;
@@ -16,7 +17,7 @@
       height: auto;
       max-height: 100%;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 
@@ -27,14 +28,35 @@
     transform: translate(-50%, -50%);
     width: 100%;
     text-align: center;
-    color: white;
-    padding: 0 20px;
+    color: var(--color-white, #fff);
+    padding: 0 1.25rem;
     z-index: 2;
 
-    h1 {
-      font-size: 3rem;
+    .company-name {
+      font-size: clamp(2rem, 5vw, 3rem);
       margin-bottom: 1rem;
-      color: white;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    }
+
+    .company-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    .company-name {
+      font-size: 2.5rem;
+    }
+    
+    .company-tagline {
+      font-size: 1.25rem;
     }
   }
 }
