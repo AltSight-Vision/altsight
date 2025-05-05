@@ -3,7 +3,7 @@ import { FC, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/alt_logo_name.svg";
 import logoMobile from "../assets/logo-mobile.svg";
-import "../styles/components/navbar-style.scss";
+import "../styles/components/navbar.scss";
 
 const Navbar: FC = () => {
   const location = useLocation();
