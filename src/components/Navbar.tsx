@@ -1,8 +1,9 @@
+// src/components/Navbar.tsx
 import { FC, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/alt_logo_name.svg";
 import logoMobile from "../assets/logo-mobile.svg";
-import "../styles/components/navbar-style.css";
+import "../styles/components/navbar-style.scss";
 
 const Navbar: FC = () => {
   const location = useLocation();
@@ -12,10 +13,8 @@ const Navbar: FC = () => {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    
-    // Initialize mobile state
+
     handleResize();
-    
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
     return () => {
@@ -26,7 +25,6 @@ const Navbar: FC = () => {
 
   const navLinks = [
     { path: "/", label: "Início", hideOnMobile: true },
-    { path: "/inicio", label: "Serviços" },
     { path: "/quemsomos", label: "Quem Somos" },
     { path: "/nossaempresa", label: "Nossa Empresa" },
   ];
@@ -45,12 +43,8 @@ const Navbar: FC = () => {
             if (isMobile && link.hideOnMobile) return null;
             return (
               <li key={link.path}>
-                <Link
-                  to={link.path}
-                  className={location.pathname === link.path ? "active" : ""}
-                >
-                  <span className="link-text">{link.label}</span>
-                  <span className="link-hover"></span>
+                <Link to={link.path} className="nav-link">
+                  {link.label}
                 </Link>
               </li>
             );
@@ -62,3 +56,5 @@ const Navbar: FC = () => {
 };
 
 export default Navbar;
+
+

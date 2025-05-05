@@ -3,8 +3,8 @@ import { features } from "../data/home/features";
 
 import VideoHero from "../components/VideoHero";
 import ContactSection from "../components/Contact";
-import "../styles/pages/home-style.css";
-import "../styles/components/features-style.css";
+import "../styles/pages/home-style.scss";
+import "../styles/components/features-style.scss";
 
 const Home: FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -30,17 +30,6 @@ const Home: FC = () => {
       <VideoHero />
       {/* Seção para as funcionalidades */}
       <section className="section features">
-        {/* === BOLHAS ESQUERDA === */}
-        <span className="bubble bubble-l1" />
-        <span className="bubble bubble-l2" />
-        <span className="bubble bubble-l3" />
-        <span className="bubble bubble-l4" />
-        {/* === BOLHAS DIREITA === */}
-        <span className="bubble bubble-r1" />
-        <span className="bubble bubble-r2" />
-        <span className="bubble bubble-r3" />
-        <span className="bubble bubble-r4" />
-
         <h2 className="section-title">Nossas Tecnologias</h2>
         <div className="features-grid">
           {features.map((feat, idx) => (

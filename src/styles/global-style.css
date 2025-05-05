@@ -1,22 +1,24 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+
 /* ============================================= */
 /*                VARIÁVEIS GLOBAIS              */
 /* ============================================= */
+
 :root {
   /* ---------- BASE COLORS ---------- */
-  --background-gradient: linear-gradient(135deg, #14281E, #105744);
-  --background-light: #f0faf0; /* greenish white */
-  --background-dark: #183627; /* deep dark green */
+  --background-gradient: linear-gradient(135deg, #105744, #14281e);
+  --background-light: #f0faf0;
+  --background-dark: #183627;
 
-  
   /* ---------- TEXT COLORS ---------- */
   --text-light: #ffffff;
   --text-dark: #202020;
 
   /* ---------- PRIMARY COLORS ---------- */
-  --primary-color: #105744; /* medium dark green */
-  --accent-color: #2b9693; /* light green */
-  --secondary-color: #3E8E63; /* vibrant green */
-
+  --primary-color: #105744;
+  --accent-color: #2b9693;
+  --secondary-color: #3e8e63;
 
   /* ---------- SPACING & LAYOUT ---------- */
   --spacing-large: 40px;
@@ -35,12 +37,11 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  font-family: "Roboto", sans-serif;  
+  font-family: 'Raleway', sans-serif;
 }
 
-/* Efeito de brilho cósmico */
 body::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -79,76 +80,4 @@ p {
   color: var(--text);
   margin: var(--spacing-small);
   text-align: left;
-}
-
-/* ============================================= */
-/*                ELEMENTOS INTERATIVOS          */
-/* ============================================= */
-a {
-  font-weight: 500;
-  text-decoration: inherit;
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-a:hover {
-  color: var(--primary-color);
-}
-
-/* ============================================= */
-/*                COMPONENTES ESPECÍFICOS        */
-/* ============================================= */
-.card {
-  background: rgba(30, 20, 50, 0.6);
-  border: 1px solid var(--primary-dark);
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 0 8px var(--star-glow);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  border-color: var(--primary-light);
-  background: rgba(50, 35, 90, 0.7);
-}
-
-
-/* ============================================= */
-/*                ANIMAÇÕES                      */
-/* ============================================= */
-@keyframes twinkle {
-  0% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-@keyframes shootingStar {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-/* ============================================= */
-/*                RESPONSIVIDADE                 */
-/* ============================================= */
-@media (max-width: 768px) {
-  :root {
-    --spacing-medium: 10px;
-    --spacing-small: 5px;
-  }
-  
-  body {
-    background-attachment: scroll;
-  }
-  
-  body::before {
-    animation: none;
-  }
 }
