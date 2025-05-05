@@ -1,12 +1,11 @@
 // src/components/Navbar.tsx
 import { FC, useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/alt_logo_name.svg";
 import logoMobile from "../assets/logo-mobile.svg";
 import "../styles/components/navbar.scss";
 
 const Navbar: FC = () => {
-  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -24,7 +23,7 @@ const Navbar: FC = () => {
   }, []);
 
   const navLinks = [
-    { path: "/", label: "Início", hideOnMobile: true },
+    { path: "/home", label: "Início", hideOnMobile: true },
     { path: "/quemsomos", label: "Quem Somos" },
     { path: "/nossaempresa", label: "Nossa Empresa" },
   ];
@@ -32,20 +31,26 @@ const Navbar: FC = () => {
   return (
     <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <NavLink to="/" end className="navbar-logo">
           <picture>
             <source srcSet={logoMobile} media="(max-width: 768px)" />
             <img src={logo} alt="Logo" className="logo-image" />
           </picture>
-        </Link>
+        </NavLink>
         <ul className="nav-list">
-          {navLinks.map((link) => {
-            if (isMobile && link.hideOnMobile) return null;
+          {navLinks.map(({ path, label, hideOnMobile }) => {
+            if (isMobile && hideOnMobile) return null;
             return (
-              <li key={link.path}>
-                <Link to={link.path} className="nav-link">
-                  {link.label}
-                </Link>
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  end={path === "/"}
+                  className={({ isActive }) =>
+                    `nav-link${isActive ? " active" : ""}`
+                  }
+                >
+                  {label}
+                </NavLink>
               </li>
             );
           })}
@@ -56,5 +61,3 @@ const Navbar: FC = () => {
 };
 
 export default Navbar;
-
-
