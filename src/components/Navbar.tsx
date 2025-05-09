@@ -23,9 +23,8 @@ const Navbar: FC = () => {
   }, []);
 
   const navLinks = [
-    { path: "/home", label: "Início", hideOnMobile: true },
+    { path: "/home", label: "Início", hideOnMobile: true }, 
     { path: "/quemsomos", label: "Quem Somos" },
-    { path: "/nossaempresa", label: "Nossa Empresa" },
   ];
 
   return (
