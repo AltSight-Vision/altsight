@@ -3,7 +3,8 @@ import { features } from "../data/home/features";
 
 import VideoHero from "../components/VideoHero";
 import ContactSection from "../components/Contact";
-import "../styles/pages/home-style.scss";
+import WhatWeDoSection from "../components/WhatWeDo";
+import "../styles/pages/home.scss";
 import "../styles/components/features-style.scss";
 
 const Home: FC = () => {
@@ -28,24 +29,8 @@ const Home: FC = () => {
   return (
     <div className="home">
       <VideoHero />
-      {/* Seção para as funcionalidades */}
-      <section className="section features">
-        <h2 className="section-title">Nossas Tecnologias</h2>
-        <div className="features-grid">
-          {features.map((feat, idx) => (
-            <div
-              key={idx}
-              className="feature-card"
-              style={{ "--i": idx } as React.CSSProperties}
-            >
-              <div className="feature-icon">{feat.icon}</div>
-              <h3>{feat.title}</h3>
-              <p>{feat.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-<ContactSection></ContactSection>
+      <WhatWeDoSection></WhatWeDoSection>
+      <ContactSection></ContactSection>
     </div>
   );
 };
