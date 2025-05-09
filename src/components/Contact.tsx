@@ -1,124 +1,105 @@
-import { FC, useState } from "react";
-import "../styles/components/contacts-style.scss";
+import { FC } from "react";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Alert,
+  Stack,
+  Paper,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
+const schema = z.object({
+  name: z.string().min(2, "Nome obrigatório"),
+  email: z.string().email("E-mail inválido"),
+  message: z.string().min(5, "Mensagem muito curta"),
+});
+
+
+type FormData = z.infer<typeof schema>;
 
 const ContactSection: FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
   });
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "success" | "error"
-  >("idle");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("sending");
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    } catch {
-      setStatus("error");
-    }
+  const onSubmit = async (data: FormData) => {
+    await new Promise((res) => setTimeout(res, 1000));
+    reset();
   };
 
   return (
-    <section className="section contact">
-      <div className="contact-container">
-        <div className="contact-info">
-          <h2 className="section-title">Como nos contactar</h2>
-          <div className="info-content">
-            <div className="info-item">
-              <h3>Telefone de Contato</h3>
-              <p>(11) 98765-4321</p>
-            </div>
-            <div className="info-item">
-              <h3>Email de Contato</h3>
-              <p>contato@agrotechsolution.com.br</p>
-            </div>
-            <div className="info-item">
-              <h3>Horário de Atendimento</h3>
-              <p>
-                Segunda a Sexta
-                <br />
-                9:00 - 18:00
-              </p>
-            </div>
-          </div>
-        </div>
+    <Box component="section" py={8} px={2} maxWidth="md" mx="auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <Typography variant="h4" gutterBottom align="center">
+          Fale com a gente
+        </Typography>
+        <Typography variant="body1" align="center" mb={4}>
+          Fale com um de nossos especialistas e <strong>transforme</strong> os processos da sua empresa.
+        </Typography>
 
-        <div className="contact-form">
-          <h2 className="section-title">Fale conosco</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                placeholder="Nome completo"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="form-input"
+        <Paper elevation={3} sx={{ p: 4 }}>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Stack spacing={3}>
+              <TextField
+                label="Nome completo"
+                {...register("name")}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+                fullWidth
               />
-            </div>
-            <div className="form-group">
-              <input
+
+              <TextField
+                label="E-mail"
                 type="email"
-                name="email"
-                placeholder="E-mail"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="form-input"
+                {...register("email")}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                fullWidth
               />
-            </div>
-            <div className="form-group">
-              <textarea
-                name="message"
-                placeholder="Sua mensagem..."
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className="form-textarea"
+
+              <TextField
+                label="Mensagem"
+                {...register("message")}
+                error={!!errors.message}
+                helperText={errors.message?.message}
+                multiline
                 rows={5}
+                fullWidth
               />
-            </div>
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={status === "sending"}
-            >
-              {status === "sending" ? "Enviando..." : "Enviar Mensagem"}
-            </button>
-            {status === "success" && (
-              <p className="form-feedback success">
-                Mensagem enviada com sucesso!
-              </p>
-            )}
-            {status === "error" && (
-              <p className="form-feedback error">
-                Ocorreu um erro. Por favor, tente novamente.
-              </p>
-            )}
+
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+              </Button>
+
+              {isSubmitSuccessful && (
+                <Alert severity="success">Mensagem enviada com sucesso!</Alert>
+              )}
+            </Stack>
           </form>
-        </div>
-      </div>
-    </section>
+        </Paper>
+      </motion.div>
+    </Box>
   );
 };
 
 export default ContactSection;
+

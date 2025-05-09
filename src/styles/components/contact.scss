@@ -1,0 +1,101 @@
+
+// Estilo principal do container da seção
+section {
+  background-color: var(background-gradient);
+  // border-radius: var(--border-radius);
+
+  h4 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: var(--spacing-small);
+  }
+
+  p,
+  .MuiTypography-body1 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-medium);
+  }
+
+  // Animação do motion container
+  .motion-div {
+    animation: fadeInUp 0.4s ease-out;
+  }
+}
+
+// Estilo do Paper (form container)
+.MuiPaper-root {
+  padding: var(--spacing-medium);
+  background-color: var(--bg-paper);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+// Estilo dos campos de formulário
+.MuiTextField-root {
+  background: white;
+  border-radius: var(--border-radius);
+
+  input,
+  textarea {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .MuiInputBase-root {
+    border-radius: var(--border-radius);
+  }
+
+  .Mui-error {
+    color: var(--error-color);
+  }
+}
+
+// Botão de envio
+.MuiButton-root[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: var(--accent-color);
+  border-radius: var(--border-radius);
+  text-transform: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--accent-hover);
+  }
+
+  &:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+  }
+}
+
+// Alertas
+.MuiAlert-root {
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  margin-top: var(--spacing-small);
+
+  &.MuiAlert-standardSuccess {
+    background-color: rgba(46, 125, 50, 0.1);
+    color: var(--success-color);
+  }
+
+  &.MuiAlert-standardError {
+    background-color: rgba(211, 47, 47, 0.1);
+    color: var(--error-color);
+  }
+}
+
+// Animação opcional para fadeInUp
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
