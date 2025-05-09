@@ -19,7 +19,6 @@ const schema = z.object({
   message: z.string().min(5, "Mensagem muito curta"),
 });
 
-
 type FormData = z.infer<typeof schema>;
 
 const ContactSection: FC = () => {
@@ -38,68 +37,152 @@ const ContactSection: FC = () => {
   };
 
   return (
-    <Box component="section" py={8} px={2} maxWidth="md" mx="auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
+    <>
+      {/* Seção - Contato */}
+      <Box
+        component="section"
+        width="100%"
+        py={2}
+        px={2}
+        sx={{
+          background: "linear-gradient(135deg, #14281e 0%, #105744 100%)",
+          color: "#ffffff",
+        }}
       >
-        <Typography variant="h4" gutterBottom align="center">
-          Fale com a gente
-        </Typography>
-        <Typography variant="body1" align="center" mb={4}>
-          Fale com um de nossos especialistas e <strong>transforme</strong> os processos da sua empresa.
-        </Typography>
+        {/* Container limitado */}
+        <Box py={2} px={2} maxWidth="sm" mx="auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Typography
+              variant="h4"
+              align="center"
+              gutterBottom
+              sx={{
+                fontWeight: 700,
+                letterSpacing: 1,
+                mb: 3,
+                "&::after": {
+                  content: '""',
+                  display: "block",
+                  width: 80,
+                  height: 4,
+                  backgroundColor: "secondary.main",
+                  margin: "16px auto 0",
+                  borderRadius: 2,
+                },
+              }}
+            >
+              Fale com a gente
+            </Typography>
 
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Stack spacing={3}>
-              <TextField
-                label="Nome completo"
-                {...register("name")}
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                fullWidth
-              />
+            <Typography
+              variant="body1"
+              align="center"
+              mb={4}
+              sx={{
+                fontSize: "1.1rem",
+                lineHeight: 1.6,
+                maxWidth: 600,
+                mx: "auto",
+                "& strong": {
+                  color: "secondary.light",
+                  fontWeight: 600,
+                  position: "relative",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: -2,
+                    left: 0,
+                    width: "100%",
+                    height: 2,
+                    backgroundColor: "secondary.main",
+                    opacity: 0.7,
+                  },
+                },
+              }}
+            >
+              Fale com um de nossos <strong>especialistas</strong> e descubra
+              como podemos <strong>transformar</strong> os processos da sua
+              empresa com soluções <strong>inteligentes</strong> e{" "}
+              <strong>personalizadas</strong>.
+            </Typography>
 
-              <TextField
-                label="E-mail"
-                type="email"
-                {...register("email")}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                fullWidth
-              />
+            <Paper
+              elevation={3}
+              sx={{
+                p: 4,
+                backgroundColor: "#ffffff",
+                color: "#000000",
+              }}
+            >
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <Stack spacing={3}>
+                  <TextField
+                    label="Nome completo"
+                    {...register("name")}
+                    error={!!errors.name}
+                    helperText={errors.name?.message}
+                    fullWidth
+                    InputLabelProps={{ style: { color: "#000000" } }}
+                    InputProps={{ style: { color: "#000000" } }}
+                  />
 
-              <TextField
-                label="Mensagem"
-                {...register("message")}
-                error={!!errors.message}
-                helperText={errors.message?.message}
-                multiline
-                rows={5}
-                fullWidth
-              />
+                  <TextField
+                    label="E-mail"
+                    type="email"
+                    {...register("email")}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
+                    fullWidth
+                    InputLabelProps={{ style: { color: "#000000" } }}
+                    InputProps={{ style: { color: "#000000" } }}
+                  />
 
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
-              </Button>
+                  <TextField
+                    label="Mensagem"
+                    {...register("message")}
+                    error={!!errors.message}
+                    helperText={errors.message?.message}
+                    multiline
+                    rows={5}
+                    fullWidth
+                    InputLabelProps={{ style: { color: "#000000" } }}
+                    InputProps={{ style: { color: "#000000" } }}
+                  />
 
-              {isSubmitSuccessful && (
-                <Alert severity="success">Mensagem enviada com sucesso!</Alert>
-              )}
-            </Stack>
-          </form>
-        </Paper>
-      </motion.div>
-    </Box>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+                  </Button>
+
+                  {isSubmitSuccessful && (
+                    <Alert
+                      severity="success"
+                      sx={{
+                        backgroundColor: "#ffffff",
+                        color: "#000000",
+                        border: (theme) =>
+                          `1px solid ${theme.palette.primary.main}`,
+                      }}
+                    >
+                      Mensagem enviada com sucesso!
+                    </Alert>
+                  )}
+                </Stack>
+              </form>
+            </Paper>
+          </motion.div>
+        </Box>
+      </Box>
+    </>
   );
 };
 
 export default ContactSection;
-
