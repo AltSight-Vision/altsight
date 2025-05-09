@@ -7,7 +7,8 @@ import {
 } from "react-router-dom";
 import "./styles/app-style.css";
 import Navbar from "./components/Navbar";
-import About from "./pages/Home";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
 
 
 const App: FC = () => {
@@ -18,7 +19,8 @@ const App: FC = () => {
         <main className="content">
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<About />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/quemsomos" element={<AboutUs />} />
           </Routes>
         </main>
       </div>
