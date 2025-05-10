@@ -1,11 +1,8 @@
 import { FC, useState, useEffect, useRef } from "react";
-import { features } from "../data/home/features";
-
 import VideoHero from "../components/VideoHero";
 import ContactSection from "../components/Contact";
 import WhatWeDoSection from "../components/WhatWeDo";
-import "../styles/pages/home.scss";
-import "../styles/components/features-style.scss";
+import { Box } from "@mui/material";
 
 const Home: FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -27,11 +24,11 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <div className="home">
+    <Box className="home">
       <VideoHero />
-      <WhatWeDoSection></WhatWeDoSection>
-      <ContactSection></ContactSection>
-    </div>
+      <WhatWeDoSection />
+      <ContactSection />
+    </Box>
   );
 };
 
