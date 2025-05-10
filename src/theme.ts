@@ -1,55 +1,46 @@
+// src/theme.ts
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#213448",       // Azul escuro
-      light: "#547792",      // Azul intermediário
-      contrastText: "#ECEFCA", // Verde muito claro como texto sobre primário
+      main: "#105744",
+      contrastText: "#ffffff",
     },
     secondary: {
-      main: "#94B4C1",       // Azul claro
-      contrastText: "#213448",
+      main: "#2b9693",
+      contrastText: "#ffffff",
     },
     background: {
-      default: "#ECEFCA",    // Verde pálido
-      paper: "#ffffff",
+      default: "#f0faf0", // Cor sólida fallback
+      paper: "#105744", // Cor sólida fallback
     },
     text: {
-      primary: "#213448",    // Azul escuro
-      secondary: "#547792",  // Azul intermediário
+      primary: "#000000",
+      secondary: "#ffffff",
     },
-    success: {
-      main: "#94B4C1",       // Azul claro como tom suave de sucesso
-    },
-    warning: {
-      main: "#E1C16E",       // Amarelo discreto (adicionado para robustez)
-    },
-    error: {
-      main: "#B00020",       // Padrão de erro do MUI
-    },
-    info: {
-      main: "#547792",       // Azul intermediário
-    },
-    divider: "#94B4C1",
+    error: { main: "#B00020" },
+    warning: { main: "#E1C16E" },
+    success: { main: "#3e8e63" },
+    info: { main: "#2b9693" },
   },
   typography: {
-    fontFamily: `"Raleway", "Helvetica", "Arial", sans-serif`,
+    fontFamily: `"Raleway", sans-serif`,
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        // só garante que o body ocupe toda a altura
         body: {
-          background: "linear-gradient(135deg, #213448, #547792)",
-          color: "#213448",
+          minHeight: "100vh",
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "8px",
+          borderRadius: 8,
           fontWeight: 600,
           textTransform: "none",
         },
@@ -58,15 +49,8 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: "10px",
-          backgroundColor: "#ffffff",
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          borderRadius: "6px",
+          borderRadius: 10,
+          // o background do Paper já vai ser o `palette.background.paper`
         },
       },
     },
