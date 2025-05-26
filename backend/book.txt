@@ -1,0 +1,340 @@
+Estou querendo fazer a Tarefa 1, Tarefa 1 – Diagnóstico do Modelo MLP (5,0 pts) - Diagnóstico do modelo MLP: Abaixo há o código de uma rede neural de três camadas fornecida pelo professor. Nessa parte da atividade, você deve avaliar esse modelo fornecido e identificar se ele pode ou não ser aplicado. A taxa de acerto ideal deve ser superior a 97%. Interprete os dados e explique o que deve ser feito.
+
+Onde o código estará a seguir juntamente com o output.
+
+# Configurações
+RANDOM_SEED = 42
+BATCH_SIZE = 32
+EPOCHS = 20
+LEARNING_RATE = 0.001
+IMG_SIZE = (64, 64)  # Redimensionar as imagens para este tamanho
+CAMERA_TO_USE = 'A'  # Usar apenas imagens desta câmera
+
+# Definir a semente para reprodutibilidade
+random.seed(RANDOM_SEED)
+np.random.seed(RANDOM_SEED)
+torch.manual_seed(RANDOM_SEED)
+
+# Verificar se GPU está disponível
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"Dispositivo de treinamento: {device}")
+
+class CombinedParkingDataset(Dataset):
+    def __init__(self, data_root, transform=None, split='train', split_ratio=(0.7, 0.15, 0.15)):
+        """
+        Args:
+            data_root (str): Caminho para a pasta raiz dos dados
+            transform (callable, optional): Transformações a serem aplicadas nas imagens
+            split (str): Divisão a ser usada ('train', 'val', 'test')
+            split_ratio (tuple): Proporção para train/val/test
+        """
+        self.data_root = data_root
+        self.transform = transform
+        self.split = split
+
+        # Coletar todos os slots únicos de ambas as câmeras
+        cameras = ['A', 'B']
+        classes = ['free', 'busy']
+
+        # Estrutura para armazenar os slots e seus arquivos
+        slot_files = {}
+
+        for camera in cameras:
+            for class_name in classes:
+                class_path = os.path.join(data_root, camera, class_name)
+                if not os.path.exists(class_path):
+                    continue
+
+                for file_name in os.listdir(class_path):
+                    if file_name.endswith('.jpg'):
+                        # Extrair o slot_id do nome do arquivo
+                        slot_id = f"{camera}_{file_name.split('_')[-1].replace('.jpg', '')}"
+                        if slot_id not in slot_files:
+                            slot_files[slot_id] = []
+                        slot_files[slot_id].append((os.path.join(class_path, file_name), class_name))
+
+        # Separar os slots em train, val, test
+        slot_ids = list(slot_files.keys())
+        random.shuffle(slot_ids)
+
+        train_end = int(len(slot_ids) * split_ratio[0])
+        val_end = train_end + int(len(slot_ids) * split_ratio[1])
+
+        train_slots = slot_ids[:train_end]
+        val_slots = slot_ids[train_end:val_end]
+        test_slots = slot_ids[val_end:]
+
+        # Selecionar os slots para a divisão atual
+        if split == 'train':
+            selected_slots = train_slots
+        elif split == 'val':
+            selected_slots = val_slots
+        else:
+            selected_slots = test_slots
+
+        # Coletar todos os arquivos dos slots selecionados
+        self.file_paths = []
+        self.labels = []
+
+        for slot in selected_slots:
+            for file_path, class_name in slot_files[slot]:
+                self.file_paths.append(file_path)
+                self.labels.append(0 if class_name == 'free' else 1)  # 0 para free, 1 para busy
+
+        print(f"{split}: {len(self.file_paths)} imagens de {len(selected_slots)} slots (combinação de câmeras A e B)")
+
+    def __len__(self):
+        return len(self.file_paths)
+
+    def __getitem__(self, idx):
+        img_path = self.file_paths[idx]
+        label = self.labels[idx]
+
+        image = Image.open(img_path).convert('RGB')
+
+        if self.transform:
+            image = self.transform(image)
+
+        return image, label
+
+    # Transformações (mantidas as mesmas)
+data_transforms = {
+    'train': transforms.Compose([
+        transforms.Resize(IMG_SIZE),
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomRotation(10),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ]),
+    'val': transforms.Compose([
+        transforms.Resize(IMG_SIZE),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ]),
+    'test': transforms.Compose([
+        transforms.Resize(IMG_SIZE),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
+}
+
+# Criar datasets combinados
+data_root = 'data/'  # Atualize com o caminho correto
+train_dataset = CombinedParkingDataset(data_root, data_transforms['train'], 'train')
+val_dataset = CombinedParkingDataset(data_root, data_transforms['val'], 'val')
+test_dataset = CombinedParkingDataset(data_root, data_transforms['test'], 'test')
+
+# Criar dataloaders
+train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4)
+val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=4)
+test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=4)
+
+
+class NeuralNet(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(NeuralNet, self).__init__()
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.sigmoid = nn.Sigmoid()
+        self.fc2 = nn.Linear(hidden_size, output_size)
+
+    def forward(self, x):
+        # Achatar a imagem para um vetor
+        x = x.view(x.size(0), -1)
+        x = self.sigmoid(self.fc1(x))
+        x = self.sigmoid(self.fc2(x))
+        return x
+
+# Calcular o tamanho da entrada
+input_size = 3 * IMG_SIZE[0] * IMG_SIZE[1]  # 3 canais * altura * largura
+hidden_size = 512  # Tamanho da camada oculta
+output_size = 1    # Saída binária
+
+model = NeuralNet(input_size, hidden_size, output_size).to(device)
+
+# Definir loss function e optimizer
+criterion = nn.BCELoss()  # Binary Cross Entropy Loss
+optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
+
+def train_model(model, train_loader, val_loader, criterion, optimizer, epochs):
+    best_acc = 0.0
+    train_losses = []
+    val_losses = []
+    val_accs = []
+
+    for epoch in range(epochs):
+        model.train()
+        running_loss = 0.0
+
+        for inputs, labels in train_loader:
+            inputs = inputs.to(device)
+            labels = labels.to(device).float().view(-1, 1)  # Adaptar para saída binária
+
+            optimizer.zero_grad()
+
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
+
+            running_loss += loss.item() * inputs.size(0)
+
+        epoch_loss = running_loss / len(train_loader.dataset)
+        train_losses.append(epoch_loss)
+
+        # Validação
+        val_loss, val_acc = evaluate_model(model, val_loader, criterion)
+        val_losses.append(val_loss)
+        val_accs.append(val_acc)
+
+        print(f'Epoch {epoch+1}/{epochs} - Train Loss: {epoch_loss:.4f} - Val Loss: {val_loss:.4f} - Val Acc: {val_acc:.4f}')
+
+        # Salvar o melhor modelo
+        if val_acc > best_acc:
+            best_acc = val_acc
+            torch.save(model.state_dict(), 'best_model_simple.pth')
+
+    # Plotar curvas de aprendizado
+    plt.figure(figsize=(12, 5))
+    plt.subplot(1, 2, 1)
+    plt.plot(train_losses, label='Train Loss')
+    plt.plot(val_losses, label='Val Loss')
+    plt.legend()
+    plt.title('Loss')
+
+    plt.subplot(1, 2, 2)
+    plt.plot(val_accs, label='Val Accuracy')
+    plt.legend()
+    plt.title('Accuracy')
+    plt.show()
+
+    return model
+
+def evaluate_model(model, loader, criterion):
+    model.eval()
+    running_loss = 0.0
+    correct = 0
+    total = 0
+
+    with torch.no_grad():
+        for inputs, labels in loader:
+            inputs = inputs.to(device)
+            labels = labels.to(device).float().view(-1, 1)
+
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+
+            running_loss += loss.item() * inputs.size(0)
+            predicted = (outputs > 0.5).float()  # Threshold de 0.5 para classificação
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+    loss = running_loss / len(loader.dataset)
+    accuracy = correct / total
+
+    return loss, accuracy
+
+def test_model(model, loader):
+    model.eval()
+    all_labels = []
+    all_preds = []
+
+    with torch.no_grad():
+        for inputs, labels in loader:
+            inputs = inputs.to(device)
+            labels = labels.to(device).float().view(-1, 1)
+
+            outputs = model(inputs)
+            predicted = (outputs > 0.5).float()
+
+            all_labels.extend(labels.cpu().numpy())
+            all_preds.extend(predicted.cpu().numpy())
+
+    accuracy = accuracy_score(all_labels, all_preds)
+    cm = confusion_matrix(all_labels, all_preds)
+
+    print(f'Test Accuracy: {accuracy:.4f}')
+    print('Confusion Matrix:')
+    print(cm)
+
+    return accuracy, cm
+
+
+# Treinar o modelo
+model = train_model(model, train_loader, val_loader, criterion, optimizer, EPOCHS)
+
+# Carregar o melhor modelo
+model.load_state_dict(torch.load('best_model_simple.pth'))
+
+# Avaliar no conjunto de teste
+test_accuracy, cm = test_model(model, test_loader)
+
+# Calcular pesos das classes (se desbalanceado)
+from collections import Counter
+class_counts = Counter(train_dataset.labels)
+class_weights = torch.tensor([1/class_counts[0], 1/class_counts[1]]).to(device)
+criterion = nn.BCELoss(weight=class_weights)
+
+def evaluate_by_camera(model, loader, dataset):
+    model.eval()
+    camera_a_correct = 0
+    camera_a_total = 0
+    camera_b_correct = 0
+    camera_b_total = 0
+
+    with torch.no_grad():
+        for i, (inputs, labels) in enumerate(loader):
+            inputs = inputs.to(device)
+            labels = labels.to(device).float().view(-1, 1)
+
+            outputs = model(inputs)
+            predicted = (outputs > 0.5).float()
+
+            # Verificar a câmera de cada imagem no batch
+            for j in range(inputs.size(0)):
+                img_path = dataset.file_paths[i * loader.batch_size + j]
+                camera = img_path.split(os.sep)[-3]  # Extrai 'A' ou 'B' do caminho
+
+                if camera == 'A':
+                    camera_a_total += 1
+                    camera_a_correct += (predicted[j] == labels[j]).item()
+                else:
+                    camera_b_total += 1
+                    camera_b_correct += (predicted[j] == labels[j]).item()
+
+    print(f"Acurácia na Câmera A: {camera_a_correct / camera_a_total:.4f}")
+    print(f"Acurácia na Câmera B: {camera_b_correct / camera_b_total:.4f}")
+
+# Avaliar no conjunto de teste
+evaluate_by_camera(model, test_loader, test_dataset)
+
+
+Epoch 1/20 - Train Loss: 0.3251 - Val Loss: 0.4752 - Val Acc: 0.8298
+Epoch 2/20 - Train Loss: 0.2248 - Val Loss: 0.4802 - Val Acc: 0.8298
+Epoch 3/20 - Train Loss: 0.2014 - Val Loss: 0.4364 - Val Acc: 0.8375
+Epoch 4/20 - Train Loss: 0.1843 - Val Loss: 0.4680 - Val Acc: 0.8435
+Epoch 5/20 - Train Loss: 0.1725 - Val Loss: 0.4579 - Val Acc: 0.8259
+Epoch 6/20 - Train Loss: 0.1630 - Val Loss: 0.4736 - Val Acc: 0.8446
+Epoch 7/20 - Train Loss: 0.1617 - Val Loss: 0.5013 - Val Acc: 0.8485
+Epoch 8/20 - Train Loss: 0.1547 - Val Loss: 0.5491 - Val Acc: 0.8562
+Epoch 9/20 - Train Loss: 0.1489 - Val Loss: 0.4645 - Val Acc: 0.8634
+Epoch 10/20 - Train Loss: 0.1390 - Val Loss: 0.4290 - Val Acc: 0.8716
+Epoch 11/20 - Train Loss: 0.1334 - Val Loss: 0.4889 - Val Acc: 0.8617
+Epoch 12/20 - Train Loss: 0.1387 - Val Loss: 0.5460 - Val Acc: 0.8556
+Epoch 13/20 - Train Loss: 0.1285 - Val Loss: 0.5473 - Val Acc: 0.8397
+Epoch 14/20 - Train Loss: 0.1265 - Val Loss: 0.5149 - Val Acc: 0.8661
+Epoch 15/20 - Train Loss: 0.1259 - Val Loss: 0.5982 - Val Acc: 0.8496
+Epoch 16/20 - Train Loss: 0.1202 - Val Loss: 0.5620 - Val Acc: 0.8529
+Epoch 17/20 - Train Loss: 0.1202 - Val Loss: 0.5560 - Val Acc: 0.8512
+Epoch 18/20 - Train Loss: 0.1201 - Val Loss: 0.5814 - Val Acc: 0.8309
+Epoch 19/20 - Train Loss: 0.1185 - Val Loss: 0.6623 - Val Acc: 0.8463
+Epoch 20/20 - Train Loss: 0.1128 - Val Loss: 0.5523 - Val Acc: 0.8496
+
+
+Test Accuracy: 0.9387
+Confusion Matrix:
+[[ 628  105]
+ [  21 1303]]
+/usr/local/lib/python3.11/dist-packages/torch/utils/data/dataloader.py:624: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Acurácia na Câmera A: 0.9458
+Acurácia na Câmera B: 0.9308
