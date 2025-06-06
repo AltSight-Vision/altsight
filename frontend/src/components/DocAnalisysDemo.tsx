@@ -177,7 +177,7 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
             {/* O tema já define o tamanho responsivo para button */}
             <Button
               component={NavLink}
-              to="/services"
+              to="/products/doc-analisys"
               startIcon={<ArrowForwardIcon />}
               sx={{
                 px: { xs: 2, sm: 3, md: 4 },

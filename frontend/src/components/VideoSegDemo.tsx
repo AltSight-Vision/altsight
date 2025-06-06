@@ -148,7 +148,7 @@ const VideoSegDemo: FC<VideoSegDemoProps> = ({
             {/* O tema já define o tamanho responsivo para button */}
             <Button
               component={NavLink}
-              to="/services"
+              to="/products/image-seg"
               startIcon={<ArrowForwardIcon />}
               sx={{
                 px: { xs: 2, sm: 3, md: 4 },
