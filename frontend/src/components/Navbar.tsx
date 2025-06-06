@@ -34,7 +34,7 @@ const Navbar: FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // Estado para o menu principal (mobile)
+  // Estados para os menus (mobile e desktop)
   const [anchorElMain, setAnchorElMain] = useState<null | HTMLElement>(null);
   const handleMainMenuOpen = (e: MouseEvent<HTMLElement>) => {
     setAnchorElMain(e.currentTarget);
@@ -44,7 +44,6 @@ const Navbar: FC = () => {
     handleProductsMenuClose();
   };
 
-  // Estado para o submenu "Produtos"
   const [anchorElProducts, setAnchorElProducts] = useState<null | HTMLElement>(null);
   const handleProductsMenuOpen = (e: MouseEvent<HTMLElement>) => {
     setAnchorElProducts(e.currentTarget);
@@ -65,8 +64,16 @@ const Navbar: FC = () => {
         zIndex: theme.zIndex.tooltip,
       }}
     >
-      <Toolbar sx={{ justifyContent: "space-between", px: isMobile ? 2 : 6 }}>
-        {/* Logo responsivo (sem blur) */}
+      {/* Ajusta a altura mínima do Toolbar quando for mobile */}
+      <Toolbar
+        sx={{
+          justifyContent: "space-between",
+          px: isMobile ? 2 : 6,
+          py: isMobile ? 2 : 1,
+          minHeight: isMobile ? 80 : 64,
+        }}
+      >
+        {/* Logo responsivo */}
         {isMobile ? (
           <Box
             component={NavLink}
@@ -81,7 +88,8 @@ const Navbar: FC = () => {
               src={mobileLogo}
               alt="AltSight"
               sx={{
-                height: 32,
+                // Aumenta a altura do logo em mobile
+                height: 48,
                 width: "auto",
                 filter: `invert(1)`,
               }}
@@ -109,9 +117,9 @@ const Navbar: FC = () => {
           </Box>
         )}
 
-        {/* Mobile: ícone de menu que abre todos os links e submenus */}
         {isMobile ? (
           <>
+            {/* Ícone de menu para telas móveis */}
             <IconButton
               edge="end"
               aria-label="menu"
@@ -120,6 +128,10 @@ const Navbar: FC = () => {
               onClick={handleMainMenuOpen}
               sx={{
                 color: theme.palette.primary.main,
+                // Aumenta o tamanho do ícone em mobile
+                "& svg": {
+                  fontSize: 32,
+                },
                 "&:hover": {
                   color: theme.palette.secondary.main,
                 },
@@ -127,6 +139,7 @@ const Navbar: FC = () => {
             >
               <MenuIcon />
             </IconButton>
+
             <Menu
               id="nav-menu"
               anchorEl={anchorElMain}
@@ -169,8 +182,9 @@ const Navbar: FC = () => {
                       <ListItemText
                         primary={link.label}
                         sx={{
-                          fontSize: "1.25rem",
-                          fontWeight: 400,
+                          // Ajusta fonte maior em mobile
+                          fontSize: "1.5rem",
+                          fontWeight: 500,
                           color: theme.palette.primary.main,
                         }}
                       />
@@ -199,12 +213,18 @@ const Navbar: FC = () => {
                         <ListItemText
                           primary={link.label}
                           sx={{
-                            fontSize: "1.25rem",
-                            fontWeight: 400,
+                            fontSize: "1.5rem",
+                            fontWeight: 500,
                             color: theme.palette.primary.main,
                           }}
                         />
-                        <ArrowDropDownIcon sx={{ color: theme.palette.primary.main }} />
+                        <ArrowDropDownIcon
+                          sx={{
+                            color: theme.palette.primary.main,
+                            // Ícone maior em mobile
+                            fontSize: 32,
+                          }}
+                        />
                       </MenuItem>
 
                       <Menu
@@ -242,7 +262,8 @@ const Navbar: FC = () => {
                             <ListItemText
                               primary={sub.label}
                               sx={{
-                                fontSize: "1.1rem",
+                                // Fonte um pouco menor que o item principal, mas ainda maior que padrão
+                                fontSize: "1.3rem",
                                 fontWeight: 400,
                                 color: theme.palette.primary.main,
                               }}
@@ -292,7 +313,7 @@ const Navbar: FC = () => {
                   </Button>
                 );
               } else {
-                // Link "Produtos" com dropdown
+                // Link "Produtos" com dropdown (desktop)
                 return (
                   <Box key={link.label}>
                     <Button
