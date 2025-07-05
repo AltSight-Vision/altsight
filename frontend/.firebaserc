@@ -1,5 +1,20 @@
 {
   "projects": {
-    "default": "notnilton-projects"
-  }
+    "default": "agrotech-c85c4",
+    "altsight": "agrotech-c85c4"
+  },
+  "targets": {
+    "agrotech-c85c4": {
+      "hosting": {
+        "agrotech-c85c4": [
+          "agrotech-c85c4"
+        ],
+        "altsight": [
+          "altsight"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

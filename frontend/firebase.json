@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "site": "agrotech-c85c4",
+      "target": "agrotech-c85c4",
       "public": "dist",
       "ignore": [
         "firebase.json",
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "site": "altsight",
+      "target": "altsight",
       "public": "dist",
       "ignore": [
         "firebase.json",
