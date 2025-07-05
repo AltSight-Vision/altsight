@@ -12,8 +12,7 @@ import theme from "./theme";
 import HomePage from "./pages/HomePage";
 
 
-import DepthPage from "./pages/DepthPage";
-import SegPage from "./pages/SegPage";
+import CompVisionPage from "./pages/CompVisionPage";
 import DocAnalisysPage from "./pages/DocAnalisysPage";
 
 const App: FC = () => {
@@ -43,8 +42,7 @@ const App: FC = () => {
               {/* <Route path="/" element={<Navigate to="/home" replace />} /> */}
               <Route path="/" element={<HomePage />} />
               <Route path="/home" element={<HomePage />} />
-              <Route path="/products/video-depth" element={<DepthPage />} />
-              <Route path="/products/image-seg" element={<SegPage />} />
+              <Route path="/products/comp-vision" element={<CompVisionPage />} />
               <Route path="/products/doc-analisys" element={<DocAnalisysPage />} />
             </Routes>
           </Box>
