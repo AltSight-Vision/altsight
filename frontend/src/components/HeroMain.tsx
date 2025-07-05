@@ -88,12 +88,11 @@ const HeroMain: FC<HeroMainProps> = ({ backgroundColor }) => {
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
             textShadow: "0 2px 8px rgba(0, 0, 0, 0.6)",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
-            color: theme.palette.primary.main,
+            color: theme.palette.secondary.main,
           }}
         >
           AltSight
         </Typography>
-
         {/* Subtítulo */}
         <Typography
           variant={isMobile ? "body2" : "h6"}
@@ -103,52 +102,13 @@ const HeroMain: FC<HeroMainProps> = ({ backgroundColor }) => {
             fontSize: { xs: "1rem", sm: "1.5rem", md: "1.75rem" },
             lineHeight: 1.5,
             textTransform: "none",
-            fontWeight: 300,
-                      
-            px: { xs: 2, sm: 3 },
-            py: { xs: 0.5, sm: 1 },
-            color: theme.palette.secondary.main,
-            bgcolor: "rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-            borderRadius: "8px",
+            fontWeight: 700, // fonte mais grossa
+            color: theme.palette.primary.main,
+            WebkitTextStroke: "1px #000",
           }}
         >
           Descubra aqui todas as soluções para seus projetos.
         </Typography>
-
-        {/* Botão de chamada */}
-        <Button
-          component={NavLink}
-          to="/products"
-          startIcon={<ArrowDownwardIcon />}
-          sx={{
-            textTransform: "none",
-            fontWeight: 700,
-            px: { xs: 3, sm: 4 },
-            py: { xs: 1, sm: 1.5 },
-            fontSize: { xs: "0.9rem", sm: "1rem" },
-            color: theme.palette.secondary.main,
-            bgcolor: "rgba(255,255,255,0.1)",
-            backdropFilter: "blur(8px)",
-            border: "none",
-            display: "inline-flex",
-            alignItems: "center",
-            borderRadius: "12px",
-            transition:
-              "transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease",
-            "&:hover": {
-              backgroundColor: "rgba(255,255,255,0.2)",
-              transform: "translateY(-4px) scale(1.02)",
-              boxShadow: "0 12px 24px rgba(0,0,0,0.3)",
-            },
-            "& .MuiButton-startIcon": {
-              marginRight: "0.5rem",
-              transition: "inherit",
-            },
-          }}
-        >
-          Conheça Mais Sobre Nossos Produtos
-        </Button>
       </Box>
     </Box>
   );
