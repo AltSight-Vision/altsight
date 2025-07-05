@@ -6,73 +6,68 @@ const theme = createTheme({
     mode: "light",
 
     primary: {
-      main: "#fb8500",
+      main: "#34a8d7",
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#ffb703",
+      main: "#1c617e",
       contrastText: "#ffffff",
     },
+
+    // fundo clarinho para destacar o primário
     background: {
-      default: "#023047",
-      paper: "#023047",
+      default: "#f0f8fd",  // tom suave de azul-claro
+      paper: "#ffffff",    // branco para componentes
     },
+
+    // texto escuro, mas com um toque de azul-escuro
     text: {
-      primary: "#ffffff",
-      secondary: "rgba(255, 255, 255, 0.7)",
+      primary: "#023047",            // quase marinho
+      secondary: "rgba(2, 48, 71, 0.7)", // mesma base, 70% de opacidade
     },
+
+    // cores de status em tons que casam com o azul/ciano
     error: {
-      main: "#B00020",
+      main: "#d32f2f",      // vermelho ligeiramente inclinado ao marrom
+      contrastText: "#ffffff",
     },
     warning: {
-      main: "#E1C16E",
-    },
-    success: {
-      main: "#3e8e63",
+      main: "#f9a825",      // amarelo-ouro
+      contrastText: "#000000",
     },
     info: {
-      main: "#2b9693",
+      main: "#29b6f6",      // azul-claro vibrante
+      contrastText: "#000000",
+    },
+    success: {
+      main: "#66bb6a",      // verde claro
+      contrastText: "#ffffff",
     },
   },
 
   typography: {
-    // Usa Exo 2. O browser já o carregou via <link> no index.html
     fontFamily: `"Exo 2", sans-serif`,
 
     h4: {
       fontWeight: 800,
-      fontSize: "1.5rem", // xs
-      "@media (min-width:600px)": {
-        fontSize: "1.75rem", // sm
-      },
-      "@media (min-width:900px)": {
-        fontSize: "2.25rem", // md
-      },
-      "@media (min-width:1200px)": {
-        fontSize: "2.75rem", // lg
-      },
+      fontSize: "1.5rem",
+      "@media (min-width:600px)": { fontSize: "1.75rem" },
+      "@media (min-width:900px)": { fontSize: "2.25rem" },
+      "@media (min-width:1200px)": { fontSize: "2.75rem" },
       lineHeight: 1.2,
     },
     body1: {
-      fontSize: "0.9rem", // xs
-      "@media (min-width:600px)": {
-        fontSize: "1rem", // sm
-      },
-      "@media (min-width:900px)": {
-        fontSize: "1.125rem", // md+
-      },
+      fontSize: "0.9rem",
+      "@media (min-width:600px)": { fontSize: "1rem" },
+      "@media (min-width:900px)": { fontSize: "1.125rem" },
       lineHeight: 1.8,
     },
     button: {
       textTransform: "none",
       fontWeight: 700,
-      fontSize: "0.8rem", // xs
-      "@media (min-width:600px)": {
-        fontSize: "0.9rem",
-      },
-      "@media (min-width:900px)": {
-        fontSize: "1rem",
-      },
+      fontSize: "0.8rem",
+      "@media (min-width:600px)": { fontSize: "0.9rem" },
+      "@media (min-width:900px)": { fontSize: "1rem" },
     },
   },
 
@@ -81,8 +76,8 @@ const theme = createTheme({
       styleOverrides: {
         body: {
           minHeight: "100vh",
-          backgroundColor: "#023047",
-          color: "#ffffff",
+          backgroundColor: "#f0f8fd",
+          color: "#023047",
         },
       },
     },
@@ -103,6 +98,7 @@ const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: ({ theme }) => ({
+          // deixa todos <strong> no tom de primary
           "& strong": {
             color: theme.palette.primary.main,
             fontWeight: 800,
