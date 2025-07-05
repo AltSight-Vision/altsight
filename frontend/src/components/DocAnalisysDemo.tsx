@@ -9,16 +9,14 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import sectionGif from "../assets/videos/compdocumentanalysis.gif"; // ajuste o caminho conforme necessário
+import sectionSvg from "../assets/images/document-analysis.svg";
 import { motion } from "framer-motion";
 
 interface CDocAnalisysDemoProps {
   backgroundColor: string;
 }
 
-const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
-  backgroundColor,
-}) => {
+const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -27,12 +25,7 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
     visible: {
       x: "0%",
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.8,
-      },
+      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8 },
     },
   };
   const imgVariants = {
@@ -40,13 +33,7 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
     visible: {
       x: "0%",
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.8,
-        delay: 0.2,
-      },
+      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8, delay: 0.2 },
     },
   };
 
@@ -61,50 +48,16 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
     >
       <Box
         sx={{
-          mx: {
-            xs: "5%",
-            sm: "8%",
-            md: "10%",
-            lg: "15%",
-          },
+          mx: { xs: "5%", sm: "8%", md: "10%", lg: "15%" },
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
           justifyContent: "space-between",
           gap: { xs: 3, sm: 5, md: 7 },
           color: "#fff",
-          overflow: "hidden",
         }}
       >
-        {/* Vídeo vertical (razão 9:16)
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={imgVariants}
-          style={{ flex: 1, display: "flex", justifyContent: "center" }}
-        >
-          <Box
-            component="video"
-            src={sectionGif} // substitua por sua variável de vídeo
-            autoPlay
-            loop
-            muted
-            playsInline
-            sx={{
-              width: {
-                xs: "80vw", // ocupa 80vw em mobile
-                sm: 180,
-                md: 280,
-                lg: 360,
-              },
-              aspectRatio: "9 / 16", // mantém 9:16
-              objectFit: "cover", // preenche sem distorcer
-              borderRadius: 0,
-            }}
-          />
-        </motion.div> */}
-
-        {/* GIF vertical (razão 9:16) */}
+        {/* SVG */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -113,18 +66,11 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
         >
           <Box
             component="img"
-            src={sectionGif} // substitua pela sua variável ou caminho do GIF
-            alt="GIF animado"
+            src={sectionSvg}
+            alt="Fluxo de análise de documento"
             sx={{
-              width: {
-                xs: "80vw", // ocupa 80vw em mobile
-                sm: 180,
-                md: 280,
-                lg: 360,
-              },
-              aspectRatio: "9 / 16", // mantém 9:16
-              objectFit: "cover", // preenche sem distorcer
-              borderRadius: 0,
+              width: { xs: "80vw", sm: 180, md: 280, lg: 360 },
+              height: "auto",
             }}
           />
         </motion.div>
@@ -144,37 +90,15 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({
               mx: { xs: "auto", md: 0 },
             }}
           >
-            {/* O tema já define o tamanho responsivo para h4 */}
-            <Typography
-              variant={isMobile ? "h5" : "h4"}
-              sx={{ mb: { xs: 2, md: 8 } }}
-            >
+            <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: { xs: 2, md: 4 } }}>
               <strong>Análise de Documentos</strong>
             </Typography>
-
-            {/* O tema já define o tamanho responsivo para body1 */}
-            <Typography
-              variant="body1"
-              sx={{
-                mb: { xs: 2, md: 4 },
-                textAlign: { xs: "justify", md: "justify" },
-              }}
-            >
-              Nosso sistema de <strong>análise de documentos</strong> integra
-              técnicas de Reconhecimento Óptico de Caracteres (
-              <strong>OCR</strong>) e Processamento de Linguagem Natural (
-              <strong>PLN</strong>) para extrair e estruturar informações
-              cruciais de arquivos variados: PDFs, contratos, faturas e
-              relatórios técnicos. Através de redes neurais treinadas para
-              detecção de padrões tipográficos e semânticos, identificamos
-              <strong> campos-chave</strong>, como datas, valores, nomes e
-              cláusulas contratuais, otimizando fluxos de trabalho em setores
-              jurídicos, financeiros e administrativos.
-              <br />
+            <Typography variant="body1" sx={{ mb: { xs: 2, md: 4 }, textAlign: "justify" }}>
+              Nosso sistema de <strong>análise de documentos</strong> integra OCR e PLN para extrair
+              informações de PDFs, contratos e relatórios. Detectamos padrões tipográficos e
+              semânticos com redes neurais, identificando <strong>campos-chave</strong> como datas,
+              valores e cláusulas, acelerando fluxos jurídicos, financeiros e administrativos.
             </Typography>
-
-            {/* O tema já define o tamanho responsivo para button */}
-            {/* O tema já define o tamanho responsivo para button */}
             <Button
               component={NavLink}
               to="/products/doc-analisys"

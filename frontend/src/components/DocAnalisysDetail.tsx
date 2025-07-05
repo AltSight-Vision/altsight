@@ -55,7 +55,7 @@ const DepthPerDetail: FC<DepthPerDetailProps> = ({ backgroundColor }) => {
       </Box>
 
       {/* Duas imagens lado a lado */}
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
@@ -88,7 +88,7 @@ const DepthPerDetail: FC<DepthPerDetailProps> = ({ backgroundColor }) => {
             objectFit: "cover",
           }}
         />
-      </Box>
+      </Box> */}
 
       {/* Texto explicativo inferior */}
       <Box

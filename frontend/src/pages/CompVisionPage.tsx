@@ -1,14 +1,14 @@
-// src/pages/SegPage.tsx
+// src/pages/CompVisionPage.tsx
 import React, { FC } from "react";
 import { Box, useTheme, useMediaQuery } from "@mui/material";
 import Navbar from "../components/Navbar";
 
 import HeroAux from "../components/HeroAux";
-import VideoSegDetail from "../components/VideoSegDetail";
+import CompVisionDetail from "../components/CompVisionDetail";
 
 import Footer from "../components/Footer";
 
-const SegPage: FC = () => {
+const CompVisionPage: FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const BACKGROUND_COLOR = "#222831";
@@ -17,10 +17,10 @@ const SegPage: FC = () => {
     <>
       <Navbar />
       <HeroAux backgroundColor={BACKGROUND_COLOR} />
-      <VideoSegDetail backgroundColor={BACKGROUND_COLOR} />
+      <CompVisionDetail backgroundColor={BACKGROUND_COLOR} />
       <Footer />
     </>
   );
 };
 
-export default SegPage;
+export default CompVisionPage;
