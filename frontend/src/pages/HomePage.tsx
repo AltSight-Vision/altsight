@@ -4,10 +4,9 @@ import { Box, useTheme, useMediaQuery } from "@mui/material";
 import Navbar from "../components/Navbar";
 
 import HeroMain from "../components/HeroMain";
-import VideoSegDemo from "../components/VideoSegDemo";
-import DepthPerDemo from "../components/DepthPerDemo";
+import CompVisionDemo from "../components/CompVisionDemo";
 import DocAnalisysDemo from "../components/DocAnalisysDemo";
-import ContactSection from "../components/ContactSection";
+import ContactDemo from "../components/ContactDemo";
 import AboutUs from "../components/AboutUs";
 
 import Footer from "../components/Footer";
@@ -21,12 +20,12 @@ const Home: FC = () => {
     <>
       <Navbar />
       <HeroMain backgroundColor={BACKGROUND_COLOR} />
-      <VideoSegDemo backgroundColor={BACKGROUND_COLOR} />
-      <DepthPerDemo backgroundColor={BACKGROUND_COLOR} />
+      <CompVisionDemo backgroundColor={BACKGROUND_COLOR} />
+      
       <DocAnalisysDemo backgroundColor={BACKGROUND_COLOR} />
       <AboutUs backgroundColor={BACKGROUND_COLOR} />
       
-      <ContactSection backgroundColor={BACKGROUND_COLOR} />
+      <ContactDemo backgroundColor={BACKGROUND_COLOR} />
       <Footer />
     </>
   );
