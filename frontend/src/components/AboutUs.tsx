@@ -10,11 +10,9 @@ import {
 import { motion } from "framer-motion";
 
 // Importação dos avatares
-import avatarAna from "../assets/images/avatars/avatar-ana.png";
-import avatarCarlos from "../assets/images/avatars/avatar-joao.png";
-import avatarBeatriz from "../assets/images/avatars/avatar-marco.png";
-import avatarDiego from "../assets/images/avatars/avatar-maria.png";
-// import avatarMariana from "../assets/images/avatars/avatar-mariana.png";
+import avatarVitor from "../assets/images/avatars/avatar-vitor.png";
+import avatarFelipe from "../assets/images/avatars/avatar-felipe.png";
+import avatarGeorge from "../assets/images/avatars/avatar-george.png";
 
 interface AboutUsProps {
   backgroundColor?: string;
@@ -22,30 +20,28 @@ interface AboutUsProps {
 
 interface Collaborator {
   name: string;
-  role: string;
+  knowledge: string; // antes era `role`
   avatarSrc: string;
 }
 
 const collaborators: Collaborator[] = [
   {
-    name: "Ana Souza",
-    role: "CEO & Fundadora",
-    avatarSrc: avatarAna,
+    name: "Vitor Custódio Chagas",
+    knowledge:
+      "Engenheiro de Visão Computacional — especialistas em processamento de imagens e estimação de profundidade; proficiente em Python e PyTorch.",
+    avatarSrc: avatarVitor,
   },
   {
-    name: "Carlos Pereira",
-    role: "CTO",
-    avatarSrc: avatarCarlos,
+    name: "Felipe Manfio Barbosa",
+    knowledge:
+      "MSc em Ciência da Computação (ICMC-USP) — pesquisador em Deep Learning e Visão Computacional; foco em segmentação e depth estimation.",
+    avatarSrc: avatarFelipe,
   },
   {
-    name: "Beatriz Lima",
-    role: "Gerente de Produto",
-    avatarSrc: avatarBeatriz,
-  },
-  {
-    name: "Diego Alves",
-    role: "Engenheiro de Software",
-    avatarSrc: avatarDiego,
+    name: "George de Borbas Nardes",
+    knowledge:
+      "PhD em Aprendizado de Máquina (Unicamp) — especialista em otimização de modelos e implantação de pipelines de ML.",
+    avatarSrc: avatarGeorge,
   },
 ];
 
@@ -93,19 +89,13 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
     >
       <Box
         sx={{
-          mx: {
-            xs: "5%",
-            sm: "8%",
-            md: "10%",
-            lg: "15%",
-          },
+          mx: { xs: "5%", sm: "8%", md: "10%", lg: "15%" },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: { xs: 3, md: 6 },
           color: "#fff",
           textAlign: "center",
-          overflow: "hidden",
         }}
       >
         <motion.div
@@ -131,15 +121,14 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
               lineHeight: 1.6,
             }}
           >
-            Fundada em 2015, a <strong>AltSight</strong> nasceu com
-            o propósito de levar inovações em visão computacional para
-            indústrias de diversos setores. Nosso time multidisciplinar combina
-            expertise em aprendizado de máquina, processamento de imagens e
-            desenvolvimento de hardware especializado, a fim de entregar
-            soluções robustas e de alta performance. Desde o primeiro projeto,
-            buscamos alinhar pesquisa acadêmica e aplicação prática, gerando
-            valor para clientes que exigem precisão, velocidade e confiabilidade
-            em ambientes reais.
+            Fundada em 2015, a <strong>AltSight</strong> nasceu com o propósito
+            de levar inovações em visão computacional para indústrias de
+            diversos setores. Nosso time multidisciplinar combina expertise em
+            aprendizado de máquina, processamento de imagens e desenvolvimento
+            de hardware especializado, a fim de entregar soluções robustas e de
+            alta performance. Desde o primeiro projeto, buscamos alinhar
+            pesquisa acadêmica e aplicação prática, gerando valor para clientes
+            que exigem precisão, velocidade e confiabilidade em ambientes reais.
             <br />
             <br />
             Ao longo dos anos, já implementamos sistemas de inspeção
@@ -173,26 +162,29 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  width: { xs: "25%", sm: "20%", md: "15%" },
+                  width: { xs: "40%", sm: "30%", md: "15%" },
                 }}
               >
                 <Avatar
                   src={col.avatarSrc}
                   alt={col.name}
                   sx={{
-                    width: isMobile ? 56 : 80,
-                    height: isMobile ? 56 : 80,
+                    width: isMobile ? 100 : 140, // aumentado
+                    height: isMobile ? 100 : 140, // aumentado
                     mb: 1,
                   }}
                 />
                 <Typography
                   variant={isMobile ? "subtitle2" : "subtitle1"}
-                  sx={{ fontWeight: 600, color: theme.palette.primary.main  }}
+                  sx={{ fontWeight: 600, color: theme.palette.primary.main }}
                 >
                   {col.name}
                 </Typography>
-                <Typography variant="caption" sx={{color: "white"  }}>
-                  {col.role}
+                <Typography
+                  variant="caption"
+                  sx={{ color: "white", fontStyle: "italic" }}
+                >
+                  {col.knowledge}
                 </Typography>
               </Box>
             ))}
