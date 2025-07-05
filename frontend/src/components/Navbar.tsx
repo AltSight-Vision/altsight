@@ -23,8 +23,7 @@ const NAV_LINKS = [
   {
     label: "Produtos",
     subMenu: [
-      { label: "Percepção de Profundidade", to: "/products/video-depth" },
-      { label: "Segmentação de Imagens", to: "/products/image-seg" },
+      { label: "Visão Computacional", to: "/products/comp-vision" },
       { label: "Análise de Documentos", to: "/products/doc-analisys" },
     ],
   },
@@ -34,23 +33,20 @@ const Navbar: FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // Estados para os menus (mobile e desktop)
   const [anchorElMain, setAnchorElMain] = useState<null | HTMLElement>(null);
-  const handleMainMenuOpen = (e: MouseEvent<HTMLElement>) => {
+  const handleMainMenuOpen = (e: MouseEvent<HTMLElement>) =>
     setAnchorElMain(e.currentTarget);
-  };
   const handleMainMenuClose = () => {
     setAnchorElMain(null);
     handleProductsMenuClose();
   };
 
-  const [anchorElProducts, setAnchorElProducts] = useState<null | HTMLElement>(null);
-  const handleProductsMenuOpen = (e: MouseEvent<HTMLElement>) => {
+  const [anchorElProducts, setAnchorElProducts] = useState<null | HTMLElement>(
+    null
+  );
+  const handleProductsMenuOpen = (e: MouseEvent<HTMLElement>) =>
     setAnchorElProducts(e.currentTarget);
-  };
-  const handleProductsMenuClose = () => {
-    setAnchorElProducts(null);
-  };
+  const handleProductsMenuClose = () => setAnchorElProducts(null);
 
   return (
     <AppBar
@@ -64,7 +60,6 @@ const Navbar: FC = () => {
         zIndex: theme.zIndex.tooltip,
       }}
     >
-      {/* Ajusta a altura mínima do Toolbar quando for mobile */}
       <Toolbar
         sx={{
           justifyContent: "space-between",
@@ -73,75 +68,39 @@ const Navbar: FC = () => {
           minHeight: isMobile ? 80 : 64,
         }}
       >
-        {/* Logo responsivo */}
-        {isMobile ? (
+        {/* Logo responsivo sem filtros */}
+        <Box
+          component={NavLink}
+          to="/"
+          sx={{ display: "inline-flex", textDecoration: "none" }}
+        >
           <Box
-            component={NavLink}
-            to="/"
+            component="img"
+            src={isMobile ? mobileLogo : desktopLogo}
+            alt="AltSight"
             sx={{
-              display: "inline-flex",
-              textDecoration: "none",
+              height: isMobile ? 48 : 90,
+              width: "auto",
             }}
-          >
-            <Box
-              component="img"
-              src={mobileLogo}
-              alt="AltSight"
-              sx={{
-                // Aumenta a altura do logo em mobile
-                height: 48,
-                width: "auto",
-                filter: `invert(1)`,
-              }}
-            />
-          </Box>
-        ) : (
-          <Box
-            component={NavLink}
-            to="/"
-            sx={{
-              display: "inline-flex",
-              textDecoration: "none",
-            }}
-          >
-            <Box
-              component="img"
-              src={desktopLogo}
-              alt="AltSight"
-              sx={{
-                height: 90,
-                width: "auto",
-                filter: `invert(1)`,
-              }}
-            />
-          </Box>
-        )}
+          />
+        </Box>
 
         {isMobile ? (
           <>
-            {/* Ícone de menu para telas móveis */}
             <IconButton
               edge="end"
               aria-label="menu"
-              aria-controls="nav-menu"
-              aria-haspopup="true"
               onClick={handleMainMenuOpen}
               sx={{
                 color: theme.palette.primary.main,
-                // Aumenta o tamanho do ícone em mobile
-                "& svg": {
-                  fontSize: 32,
-                },
-                "&:hover": {
-                  color: theme.palette.secondary.main,
-                },
+                "& svg": { fontSize: 32 },
+                "&:hover": { color: theme.palette.secondary.main },
               }}
             >
               <MenuIcon />
             </IconButton>
 
             <Menu
-              id="nav-menu"
               anchorEl={anchorElMain}
               open={Boolean(anchorElMain)}
               onClose={handleMainMenuClose}
@@ -155,210 +114,77 @@ const Navbar: FC = () => {
                 },
               }}
             >
-              {NAV_LINKS.map((link) => {
-                if (!link.subMenu) {
-                  // Link simples
-                  return (
-                    <MenuItem
-                      key={link.to}
-                      component={NavLink}
-                      to={link.to}
-                      onClick={handleMainMenuClose}
+              {NAV_LINKS.map((link) =>
+                !link.subMenu ? (
+                  <MenuItem
+                    key={link.to}
+                    component={NavLink}
+                    to={link.to}
+                    onClick={handleMainMenuClose}
+                    sx={{
+                      backgroundColor: "rgba(0,0,0,0.3)",
+                      backdropFilter: "blur(4px)",
+                      borderRadius: 1,
+                      mx: 1,
+                      my: 0.5,
+                      "&.active .MuiListItemText-primary": {
+                        fontWeight: 800,
+                        color: theme.palette.secondary.main,
+                      },
+                      "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
+                    }}
+                  >
+                    <ListItemText
+                      primary={link.label}
                       sx={{
-                        backgroundColor: "rgba(0, 0, 0, 0.3)",
+                        fontSize: "1.5rem",
+                        fontWeight: 500,
+                        color: theme.palette.primary.main,
+                      }}
+                    />
+                  </MenuItem>
+                ) : (
+                  <React.Fragment key={link.label}>
+                    <MenuItem
+                      onClick={handleProductsMenuOpen}
+                      sx={{
+                        backgroundColor: "rgba(0,0,0,0.3)",
                         backdropFilter: "blur(4px)",
                         borderRadius: 1,
                         mx: 1,
                         my: 0.5,
-                        "&.active .MuiListItemText-primary": {
-                          fontWeight: 800,
-                          color: theme.palette.secondary.main,
-                        },
-                        "&:hover": {
-                          backgroundColor: "rgba(0, 0, 0, 0.4)",
-                        },
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
                       }}
                     >
                       <ListItemText
                         primary={link.label}
                         sx={{
-                          // Ajusta fonte maior em mobile
                           fontSize: "1.5rem",
                           fontWeight: 500,
                           color: theme.palette.primary.main,
                         }}
                       />
+                      <ArrowDropDownIcon
+                        sx={{ color: theme.palette.primary.main, fontSize: 32 }}
+                      />
                     </MenuItem>
-                  );
-                } else {
-                  // Link "Produtos" com submenu
-                  return (
-                    <React.Fragment key={link.label}>
-                      <MenuItem
-                        onClick={handleProductsMenuOpen}
-                        sx={{
-                          backgroundColor: "rgba(0, 0, 0, 0.3)",
-                          backdropFilter: "blur(4px)",
-                          borderRadius: 1,
-                          mx: 1,
-                          my: 0.5,
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          "&:hover": {
-                            backgroundColor: "rgba(0, 0, 0, 0.4)",
-                          },
-                        }}
-                      >
-                        <ListItemText
-                          primary={link.label}
-                          sx={{
-                            fontSize: "1.5rem",
-                            fontWeight: 500,
-                            color: theme.palette.primary.main,
-                          }}
-                        />
-                        <ArrowDropDownIcon
-                          sx={{
-                            color: theme.palette.primary.main,
-                            // Ícone maior em mobile
-                            fontSize: 32,
-                          }}
-                        />
-                      </MenuItem>
-
-                      <Menu
-                        id="products-submenu-mobile"
-                        anchorEl={anchorElProducts}
-                        open={Boolean(anchorElProducts)}
-                        onClose={handleProductsMenuClose}
-                        anchorOrigin={{ vertical: "center", horizontal: "right" }}
-                        transformOrigin={{ vertical: "center", horizontal: "left" }}
-                        PaperProps={{
-                          sx: {
-                            backgroundColor: "rgba(0, 0, 0, 0.3)",
-                            backdropFilter: "blur(4px)",
-                            boxShadow: "none",
-                            mt: 0,
-                          },
-                        }}
-                      >
-                        {link.subMenu.map((sub) => (
-                          <MenuItem
-                            key={sub.to}
-                            component={NavLink}
-                            to={sub.to}
-                            onClick={() => {
-                              handleProductsMenuClose();
-                              handleMainMenuClose();
-                            }}
-                            sx={{
-                              backgroundColor: "transparent",
-                              "&:hover": {
-                                backgroundColor: "rgba(0, 0, 0, 0.4)",
-                              },
-                            }}
-                          >
-                            <ListItemText
-                              primary={sub.label}
-                              sx={{
-                                // Fonte um pouco menor que o item principal, mas ainda maior que padrão
-                                fontSize: "1.3rem",
-                                fontWeight: 400,
-                                color: theme.palette.primary.main,
-                              }}
-                            />
-                          </MenuItem>
-                        ))}
-                      </Menu>
-                    </React.Fragment>
-                  );
-                }
-              })}
-            </Menu>
-          </>
-        ) : (
-          /* Desktop: links e dropdown para "Produtos" */
-          <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
-            {NAV_LINKS.map((link) => {
-              if (!link.subMenu) {
-                // Link simples
-                return (
-                  <Button
-                    key={link.to}
-                    component={NavLink}
-                    to={link.to}
-                    sx={{
-                      backgroundColor: "rgba(0, 0, 0, 0.3)",
-                      backdropFilter: "blur(4px)",
-                      borderRadius: 1,
-                      px: 1.5,
-                      py: 0.5,
-                      color: theme.palette.primary.main,
-                      textTransform: "none",
-                      fontWeight: 400,
-                      fontSize: "1.25rem",
-                      "&.active": {
-                        color: theme.palette.secondary.main,
-                        backgroundColor: "rgba(0, 0, 0, 0.4)",
-                      },
-                      "&:hover": {
-                        backgroundColor: "rgba(0, 0, 0, 0.4)",
-                        color: theme.palette.secondary.main,
-                        transform: "translateY(-2px)",
-                      },
-                    }}
-                  >
-                    {link.label}
-                  </Button>
-                );
-              } else {
-                // Link "Produtos" com dropdown (desktop)
-                return (
-                  <Box key={link.label}>
-                    <Button
-                      onClick={handleProductsMenuOpen}
-                      sx={{
-                        backgroundColor: "rgba(0, 0, 0, 0.3)",
-                        backdropFilter: "blur(4px)",
-                        borderRadius: 1,
-                        px: 1.5,
-                        py: 0.5,
-                        color: theme.palette.primary.main,
-                        textTransform: "none",
-                        fontWeight: 400,
-                        fontSize: "1.25rem",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 0.5,
-                        "&.active": {
-                          color: theme.palette.secondary.main,
-                          backgroundColor: "rgba(0, 0, 0, 0.4)",
-                        },
-                        "&:hover": {
-                          backgroundColor: "rgba(0, 0, 0, 0.4)",
-                          color: theme.palette.secondary.main,
-                          transform: "translateY(-2px)",
-                        },
-                      }}
-                    >
-                      {link.label}
-                      <ArrowDropDownIcon sx={{ color: theme.palette.primary.main }} />
-                    </Button>
-
                     <Menu
-                      id="products-submenu-desktop"
                       anchorEl={anchorElProducts}
                       open={Boolean(anchorElProducts)}
                       onClose={handleProductsMenuClose}
-                      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                      anchorOrigin={{ vertical: "center", horizontal: "right" }}
+                      transformOrigin={{
+                        vertical: "center",
+                        horizontal: "left",
+                      }}
                       PaperProps={{
                         sx: {
-                          backgroundColor: "rgba(0, 0, 0, 0.3)",
+                          backgroundColor: "rgba(0,0,0,0.3)",
                           backdropFilter: "blur(4px)",
                           boxShadow: "none",
-                          mt: 0.5,
                         },
                       }}
                     >
@@ -367,18 +193,19 @@ const Navbar: FC = () => {
                           key={sub.to}
                           component={NavLink}
                           to={sub.to}
-                          onClick={handleProductsMenuClose}
+                          onClick={() => {
+                            handleProductsMenuClose();
+                            handleMainMenuClose();
+                          }}
                           sx={{
                             backgroundColor: "transparent",
-                            "&:hover": {
-                              backgroundColor: "rgba(0, 0, 0, 0.4)",
-                            },
+                            "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
                           }}
                         >
                           <ListItemText
                             primary={sub.label}
                             sx={{
-                              fontSize: "1.1rem",
+                              fontSize: "1.3rem",
                               fontWeight: 400,
                               color: theme.palette.primary.main,
                             }}
@@ -386,10 +213,115 @@ const Navbar: FC = () => {
                         </MenuItem>
                       ))}
                     </Menu>
-                  </Box>
-                );
-              }
-            })}
+                  </React.Fragment>
+                )
+              )}
+            </Menu>
+          </>
+        ) : (
+          <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+            {NAV_LINKS.map((link) =>
+              !link.subMenu ? (
+                <Button
+                  key={link.to}
+                  component={NavLink}
+                  to={link.to}
+                  sx={{
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    backdropFilter: "blur(4px)",
+                    borderRadius: 1,
+                    px: 1.5,
+                    py: 0.5,
+                    color: theme.palette.primary.main,
+                    textTransform: "none",
+                    fontWeight: 400,
+                    fontSize: "1.25rem",
+                    "&.active": {
+                      color: theme.palette.secondary.main,
+                      backgroundColor: "rgba(0,0,0,0.4)",
+                    },
+                    "&:hover": {
+                      backgroundColor: "rgba(0,0,0,0.4)",
+                      color: theme.palette.secondary.main,
+                      transform: "translateY(-2px)",
+                    },
+                  }}
+                >
+                  {link.label}
+                </Button>
+              ) : (
+                <Box key={link.label}>
+                  <Button
+                    onClick={handleProductsMenuOpen}
+                    sx={{
+                      backgroundColor: "rgba(0,0,0,0.3)",
+                      backdropFilter: "blur(4px)",
+                      borderRadius: 1,
+                      px: 1.5,
+                      py: 0.5,
+                      color: theme.palette.primary.main,
+                      textTransform: "none",
+                      fontWeight: 400,
+                      fontSize: "1.25rem",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 0.5,
+                      "&.active": {
+                        color: theme.palette.secondary.main,
+                        backgroundColor: "rgba(0,0,0,0.4)",
+                      },
+                      "&:hover": {
+                        backgroundColor: "rgba(0,0,0,0.4)",
+                        color: theme.palette.secondary.main,
+                        transform: "translateY(-2px)",
+                      },
+                    }}
+                  >
+                    {link.label}
+                    <ArrowDropDownIcon
+                      sx={{ color: theme.palette.primary.main }}
+                    />
+                  </Button>
+                  <Menu
+                    anchorEl={anchorElProducts}
+                    open={Boolean(anchorElProducts)}
+                    onClose={handleProductsMenuClose}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+                    transformOrigin={{ vertical: "top", horizontal: "left" }}
+                    PaperProps={{
+                      sx: {
+                        backgroundColor: "rgba(0,0,0,0.3)",
+                        backdropFilter: "blur(4px)",
+                        boxShadow: "none",
+                        mt: 0.5,
+                      },
+                    }}
+                  >
+                    {link.subMenu.map((sub) => (
+                      <MenuItem
+                        key={sub.to}
+                        component={NavLink}
+                        to={sub.to}
+                        onClick={handleProductsMenuClose}
+                        sx={{
+                          backgroundColor: "transparent",
+                          "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
+                        }}
+                      >
+                        <ListItemText
+                          primary={sub.label}
+                          sx={{
+                            fontSize: "1.1rem",
+                            fontWeight: 400,
+                            color: theme.palette.primary.main,
+                          }}
+                        />
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              )
+            )}
           </Box>
         )}
       </Toolbar>
