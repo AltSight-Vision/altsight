@@ -1,4 +1,4 @@
-// src/components/HeroMain.tsx
+// src/components/HeroSection.tsx
 import React, { FC } from "react";
 import {
   Box,
@@ -11,11 +11,11 @@ import { NavLink } from "react-router-dom";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import heroVideo from "../assets/videos/hero-video.mp4";
 
-interface HeroMainProps {
+interface HeroSectionProps {
   backgroundColor: string;
 }
 
-const HeroMain: FC<HeroMainProps> = ({ backgroundColor }) => {
+const HeroSection: FC<HeroSectionProps> = ({ backgroundColor }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -53,7 +53,7 @@ const HeroMain: FC<HeroMainProps> = ({ backgroundColor }) => {
         }}
       />
 
-      {/* Conteúdo do HeroMain */}
+      {/* Conteúdo do HeroSection */}
       <Box
         sx={{
           position: "absolute",
@@ -114,4 +114,4 @@ const HeroMain: FC<HeroMainProps> = ({ backgroundColor }) => {
   );
 };
 
-export default React.memo(HeroMain);
+export default React.memo(HeroSection);
