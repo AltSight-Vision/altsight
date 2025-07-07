@@ -1,4 +1,4 @@
-// src/components/CompVisionDemo.tsx
+// src/components/CompVisionSection.tsx
 import React, { FC } from "react";
 import {
   Box,
@@ -13,11 +13,13 @@ import sectionVideo1 from "../assets/videos/compvisionsegmentation.mp4";
 import sectionVideo2 from "../assets/videos/compvisiondepth.mp4";
 import { motion } from "framer-motion";
 
-interface CompVisionDemoProps {
+interface CompVisionSectionProps {
   backgroundColor: string;
 }
 
-const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
+const CompVisionSection: FC<CompVisionSectionProps> = ({
+  backgroundColor,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -26,12 +28,7 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
     visible: {
       x: "0%",
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.8,
-      },
+      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8 },
     },
   };
   const imgVariants = {
@@ -39,41 +36,19 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
     visible: {
       x: "0%",
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.8,
-        delay: 0.2,
-      },
+      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8, delay: 0.2 },
     },
   };
 
-  // Esses offsets criam o deslocamento diagonal
-  const offsets = {
-    xs: 40,
-    sm: 40,
-    md: 80,
-    lg: 120,
-  };
-
-  // Larguras dos vídeos nos breakpoints
-  const widths = {
-    xs: "80vw",
-    sm: 180,
-    md: 280,
-    lg: 360,
-  };
-
-  // Gera string de calc para o height do wrapper: width*9/16 + offset
+  // esses offsets e cálculos continuam válidos para desktop
+  const offsets = { xs: 40, sm: 40, md: 80, lg: 120 };
+  const widths = { xs: "80vw", sm: 180, md: 280, lg: 360 };
   const wrapperHeights = {
-    xs: `calc(${widths.xs} * 9 / 16 + ${offsets.xs}px)`,
-    sm: `calc(${widths.sm}px * 9 / 16 + ${offsets.sm}px)`,
-    md: `calc(${widths.md}px * 9 / 16 + ${offsets.md}px)`,
-    lg: `calc(${widths.lg}px * 9 / 16 + ${offsets.lg}px)`,
+    xs: `calc(${widths.xs} * 9/16 + ${offsets.xs}px)`,
+    sm: `calc(${widths.sm}px * 9/16 + ${offsets.sm}px)`,
+    md: `calc(${widths.md}px * 9/16 + ${offsets.md}px)`,
+    lg: `calc(${widths.lg}px * 9/16 + ${offsets.lg}px)`,
   };
-
-  // Gera string de calc para o height dos vídeos: 100% do wrapper menos o offset
   const videoHeights = {
     xs: `calc(100% - ${offsets.xs}px)`,
     sm: `calc(100% - ${offsets.sm}px)`,
@@ -81,12 +56,12 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
     lg: `calc(100% - ${offsets.lg}px)`,
   };
 
-  const BACKGROUND_COLOR = backgroundColor || "#f0f0f0";
+  const bg = backgroundColor || "#f0f0f0";
 
   return (
     <Box
       sx={{
-        backgroundColor: BACKGROUND_COLOR,
+        backgroundColor: bg,
         py: { xs: 4, sm: 6, md: 8, lg: 10 },
       }}
     >
@@ -101,21 +76,14 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
           color: "#fff",
         }}
       >
-        {/* ───── Vídeos em caixa respeitando fluxo ───── */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={imgVariants}
-          style={{ flex: 1, display: "flex" }}
-        >
-          <Box
-            sx={{
-              position: "relative", // wrapper para vídeos
-              width: widths,
-              height: wrapperHeights, // reserva o espaço total
-            }}
+        {/* Vídeos */}
+        {isMobile ? (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={imgVariants}
+            style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}
           >
-            {/* Vídeo de baixo (posicionado em 0,0) */}
             <Box
               component="video"
               src={sectionVideo1}
@@ -124,16 +92,13 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
               muted
               playsInline
               sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
                 width: "100%",
-                height: videoHeights, // height = wrapperHeight - offset
+                aspectRatio: "16/9",
                 objectFit: "cover",
+                borderRadius: 2,
+                boxShadow: 3,
               }}
             />
-
-            {/* Vídeo de cima, deslocado diagonal */}
             <Box
               component="video"
               src={sectionVideo2}
@@ -142,30 +107,79 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
               muted
               playsInline
               sx={{
-                position: "absolute",
-                top: {
-                  xs: `${offsets.xs}px`,
-                  sm: `${offsets.sm}px`,
-                  md: `${offsets.md}px`,
-                  lg: `${offsets.lg}px`,
-                },
-                left: {
-                  xs: `${offsets.xs}px`,
-                  sm: `${offsets.sm}px`,
-                  md: `${offsets.md}px`,
-                  lg: `${offsets.lg}px`,
-                },
                 width: "100%",
-                height: videoHeights,
+                aspectRatio: "16/9",
                 objectFit: "cover",
-                boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
-                zIndex: 1,
+                borderRadius: 2,
+                boxShadow: 3,
               }}
             />
-          </Box>
-        </motion.div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={imgVariants}
+            style={{ flex: 1, display: "flex" }}
+          >
+            <Box
+              sx={{
+                position: "relative",
+                width: widths,
+                height: wrapperHeights,
+              }}
+            >
+              {/* vídeo de baixo */}
+              <Box
+                component="video"
+                src={sectionVideo1}
+                autoPlay
+                loop
+                muted
+                playsInline
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: videoHeights,
+                  objectFit: "cover",
+                }}
+              />
+              {/* vídeo de cima */}
+              <Box
+                component="video"
+                src={sectionVideo2}
+                autoPlay
+                loop
+                muted
+                playsInline
+                sx={{
+                  position: "absolute",
+                  top: {
+                    xs: `${offsets.xs}px`,
+                    sm: `${offsets.sm}px`,
+                    md: `${offsets.md}px`,
+                    lg: `${offsets.lg}px`,
+                  },
+                  left: {
+                    xs: `${offsets.xs}px`,
+                    sm: `${offsets.sm}px`,
+                    md: `${offsets.md}px`,
+                    lg: `${offsets.lg}px`,
+                  },
+                  width: "100%",
+                  height: videoHeights,
+                  objectFit: "cover",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.4)",
+                  zIndex: 1,
+                }}
+              />
+            </Box>
+          </motion.div>
+        )}
 
-        {/* ───── Texto + botão ───── */}
+        {/* Texto + botão */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -176,7 +190,7 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
             sx={{
               textAlign: { xs: "center", md: "left" },
               mt: { xs: 3, md: 0 },
-              maxWidth: { xs: "80vw", sm: "80vw", md: "100%" },
+              maxWidth: { xs: "100%", md: "100%" },
               mx: { xs: "auto", md: 0 },
             }}
           >
@@ -184,17 +198,18 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
               variant={isMobile ? "h5" : "h4"}
               sx={{ mb: { xs: 2, md: 8 } }}
             >
-              <strong>
-                Segmentação de Imagens & Percepção de Profundidade
-              </strong>
+              <strong>Visão Computacional</strong>
             </Typography>
             <Typography
               variant="body1"
-              sx={{ mb: { xs: 2, md: 4 }, textAlign: "justify" }}
+              sx={{
+                mb: { xs: 2, md: 4 },
+                textAlign: "justify",
+              }}
             >
-              Nossa solução combina segmentação avançada e análise de
-              profundidade em um único fluxo de trabalho. Utilizamos redes
-              neurais para isolar objetos com precisão subpixel e técnicas
+              Nossa solução combina <strong>segmentação avançada</strong> e
+              análise de profundidade em um único fluxo de trabalho. Utilizamos
+              redes neurais para isolar objetos com precisão subpixel e técnicas
               estéreo ou sensores ToF para gerar mapas de profundidade métricos
               em tempo real. Esse conjunto permite aplicações em agricultura de
               precisão, inspeção industrial, navegação autônoma e robótica
@@ -232,4 +247,4 @@ const CompVisionDemo: FC<CompVisionDemoProps> = ({ backgroundColor }) => {
   );
 };
 
-export default React.memo(CompVisionDemo);
+export default React.memo(CompVisionSection);
