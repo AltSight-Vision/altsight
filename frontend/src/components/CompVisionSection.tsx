@@ -17,9 +17,7 @@ interface CompVisionSectionProps {
   backgroundColor: string;
 }
 
-const CompVisionSection: FC<CompVisionSectionProps> = ({
-  backgroundColor,
-}) => {
+const CompVisionSection: FC<CompVisionSectionProps> = ({ backgroundColor }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -28,7 +26,12 @@ const CompVisionSection: FC<CompVisionSectionProps> = ({
     visible: {
       x: "0%",
       opacity: 1,
-      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8 },
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        duration: 0.8,
+      },
     },
   };
   const imgVariants = {
@@ -36,7 +39,13 @@ const CompVisionSection: FC<CompVisionSectionProps> = ({
     visible: {
       x: "0%",
       opacity: 1,
-      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8, delay: 0.2 },
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        duration: 0.8,
+        delay: 0.2,
+      },
     },
   };
 
@@ -82,7 +91,12 @@ const CompVisionSection: FC<CompVisionSectionProps> = ({
             initial="hidden"
             animate="visible"
             variants={imgVariants}
-            style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
           >
             <Box
               component="video"
@@ -207,14 +221,20 @@ const CompVisionSection: FC<CompVisionSectionProps> = ({
                 textAlign: "justify",
               }}
             >
-              Nossa solução combina <strong>segmentação avançada</strong> e
-              análise de profundidade em um único fluxo de trabalho. Utilizamos
-              redes neurais para isolar objetos com precisão subpixel e técnicas
-              estéreo ou sensores ToF para gerar mapas de profundidade métricos
-              em tempo real. Esse conjunto permite aplicações em agricultura de
-              precisão, inspeção industrial, navegação autônoma e robótica
-              colaborativa, entregando insights confiáveis que otimizam
-              processos e reduzem custos.
+              A Visão Computacional está transformando a forma como máquinas
+              entendem o mundo visual. Seja para automatizar processos
+              industriais, monitorar ambientes em tempo real, analisar imagens
+              aéreas ou otimizar operações com inteligência artificial, essa
+              tecnologia abre novas possibilidades para empresas que buscam
+              inovação com eficiência. Na nossa equipe, aplicamos algoritmos
+              avançados para extrair informações valiosas de imagens e vídeos,
+              criando soluções sob medida que vão desde detecção de objetos e
+              análise de qualidade até reconhecimento de padrões e reconstrução
+              3D. Atuamos em diversos setores como{" "}
+              <strong>
+                agronegócio, logística, saúde, segurança, varejo e indústria
+              </strong>{" "}
+              .
             </Typography>
 
             <Button
