@@ -8,9 +8,9 @@ import {
 } from "react-router-dom";
 import { ThemeProvider, CssBaseline, Box } from "@mui/material";
 import theme from "./theme";
+import ScrollToTop from "./utils/ScrollToTop";
 
 import HomePage from "./pages/HomePage";
-
 
 import CompVisionPage from "./pages/CompVisionPage";
 import DocAnalisysPage from "./pages/DocAnalisysPage";
@@ -20,6 +20,7 @@ const App: FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <ScrollToTop />
         <Box
           sx={{
             display: "flex",
@@ -42,8 +43,14 @@ const App: FC = () => {
               {/* <Route path="/" element={<Navigate to="/home" replace />} /> */}
               <Route path="/" element={<HomePage />} />
               <Route path="/home" element={<HomePage />} />
-              <Route path="/products/comp-vision" element={<CompVisionPage />} />
-              <Route path="/products/doc-analisys" element={<DocAnalisysPage />} />
+              <Route
+                path="/products/comp-vision"
+                element={<CompVisionPage />}
+              />
+              <Route
+                path="/products/doc-analisys"
+                element={<DocAnalisysPage />}
+              />
             </Routes>
           </Box>
         </Box>
