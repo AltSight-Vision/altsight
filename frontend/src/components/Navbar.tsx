@@ -53,7 +53,8 @@ const Navbar: FC = () => {
       position="absolute"
       elevation={0}
       sx={{
-        backgroundColor: "transparent",
+        backgroundColor: "#ffffff",
+        borderRadius: 0,
         top: 0,
         left: 0,
         right: 0,
@@ -64,11 +65,11 @@ const Navbar: FC = () => {
         sx={{
           justifyContent: "space-between",
           px: isMobile ? 2 : 6,
-          py: isMobile ? 2 : 1,
-          minHeight: isMobile ? 80 : 64,
+          py: isMobile ? 1 : 1,
+          minHeight: isMobile ? 56 : 64,
         }}
       >
-        {/* Logo responsivo sem filtros */}
+        {/* Logo responsivo */}
         <Box
           component={NavLink}
           to="/"
@@ -79,7 +80,7 @@ const Navbar: FC = () => {
             src={isMobile ? mobileLogo : desktopLogo}
             alt="AltSight"
             sx={{
-              height: isMobile ? 48 : 90,
+              height: isMobile ? 32 : 48,
               width: "auto",
             }}
           />
@@ -93,13 +94,14 @@ const Navbar: FC = () => {
               onClick={handleMainMenuOpen}
               sx={{
                 color: theme.palette.primary.main,
-                "& svg": { fontSize: 32 },
+                "& svg": { fontSize: 30 },
                 "&:hover": { color: theme.palette.secondary.main },
               }}
             >
               <MenuIcon />
             </IconButton>
 
+            {/* Menu principal (mobile) */}
             <Menu
               anchorEl={anchorElMain}
               open={Boolean(anchorElMain)}
@@ -108,9 +110,10 @@ const Navbar: FC = () => {
               transformOrigin={{ vertical: "top", horizontal: "right" }}
               PaperProps={{
                 sx: {
-                  backgroundColor: "transparent",
-                  boxShadow: "none",
+                  backgroundColor: "#ffffff",   // fundo branco
+                  boxShadow: "0px 4px 16px rgba(0,0,0,0.1)",
                   mt: 1,
+                  borderRadius: 0,
                 },
               }}
             >
@@ -122,22 +125,16 @@ const Navbar: FC = () => {
                     to={link.to}
                     onClick={handleMainMenuClose}
                     sx={{
-                      backgroundColor: "rgba(0,0,0,0.3)",
-                      backdropFilter: "blur(4px)",
-                      borderRadius: 1,
-                      mx: 1,
-                      my: 0.5,
                       "&.active .MuiListItemText-primary": {
                         fontWeight: 800,
                         color: theme.palette.secondary.main,
                       },
-                      "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
                     }}
                   >
                     <ListItemText
                       primary={link.label}
                       sx={{
-                        fontSize: "1.5rem",
+                        fontSize: "1.25rem",
                         fontWeight: 500,
                         color: theme.palette.primary.main,
                       }}
@@ -148,29 +145,24 @@ const Navbar: FC = () => {
                     <MenuItem
                       onClick={handleProductsMenuOpen}
                       sx={{
-                        backgroundColor: "rgba(0,0,0,0.3)",
-                        backdropFilter: "blur(4px)",
-                        borderRadius: 1,
-                        mx: 1,
-                        my: 0.5,
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
                       }}
                     >
                       <ListItemText
                         primary={link.label}
                         sx={{
-                          fontSize: "1.5rem",
+                          fontSize: "1.25rem",
                           fontWeight: 500,
                           color: theme.palette.primary.main,
                         }}
                       />
                       <ArrowDropDownIcon
-                        sx={{ color: theme.palette.primary.main, fontSize: 32 }}
+                        sx={{ color: theme.palette.primary.main, fontSize: 30 }}
                       />
                     </MenuItem>
+                    {/* Submenu Produtos (mobile) */}
                     <Menu
                       anchorEl={anchorElProducts}
                       open={Boolean(anchorElProducts)}
@@ -182,9 +174,9 @@ const Navbar: FC = () => {
                       }}
                       PaperProps={{
                         sx: {
-                          backgroundColor: "rgba(0,0,0,0.3)",
-                          backdropFilter: "blur(4px)",
-                          boxShadow: "none",
+                          backgroundColor: "#ffffff", // fundo branco
+                          boxShadow: "0px 4px 16px rgba(0,0,0,0.1)",
+                          borderRadius: 0,
                         },
                       }}
                     >
@@ -197,15 +189,11 @@ const Navbar: FC = () => {
                             handleProductsMenuClose();
                             handleMainMenuClose();
                           }}
-                          sx={{
-                            backgroundColor: "transparent",
-                            "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
-                          }}
                         >
                           <ListItemText
                             primary={sub.label}
                             sx={{
-                              fontSize: "1.3rem",
+                              fontSize: "1.2rem",
                               fontWeight: 400,
                               color: theme.palette.primary.main,
                             }}
@@ -219,6 +207,7 @@ const Navbar: FC = () => {
             </Menu>
           </>
         ) : (
+          /* Desktop */
           <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
             {NAV_LINKS.map((link) =>
               !link.subMenu ? (
@@ -227,23 +216,21 @@ const Navbar: FC = () => {
                   component={NavLink}
                   to={link.to}
                   sx={{
-                    backgroundColor: "rgba(0,0,0,0.3)",
-                    backdropFilter: "blur(4px)",
-                    borderRadius: 1,
+                    backgroundColor: "rgba(0,0,0,0.05)",
+                    borderRadius: 0,
                     px: 1.5,
                     py: 0.5,
                     color: theme.palette.primary.main,
                     textTransform: "none",
                     fontWeight: 400,
-                    fontSize: "1.25rem",
+                    fontSize: "1rem",
                     "&.active": {
                       color: theme.palette.secondary.main,
-                      backgroundColor: "rgba(0,0,0,0.4)",
+                      backgroundColor: "rgba(0,0,0,0.1)",
                     },
                     "&:hover": {
-                      backgroundColor: "rgba(0,0,0,0.4)",
+                      backgroundColor: "rgba(0,0,0,0.1)",
                       color: theme.palette.secondary.main,
-                      transform: "translateY(-2px)",
                     },
                   }}
                 >
@@ -254,34 +241,33 @@ const Navbar: FC = () => {
                   <Button
                     onClick={handleProductsMenuOpen}
                     sx={{
-                      backgroundColor: "rgba(0,0,0,0.3)",
-                      backdropFilter: "blur(4px)",
-                      borderRadius: 1,
+                      backgroundColor: "rgba(0,0,0,0.05)",
+                      borderRadius: 0,
                       px: 1.5,
                       py: 0.5,
                       color: theme.palette.primary.main,
                       textTransform: "none",
                       fontWeight: 400,
-                      fontSize: "1.25rem",
+                      fontSize: "1rem",
                       display: "flex",
                       alignItems: "center",
                       gap: 0.5,
                       "&.active": {
                         color: theme.palette.secondary.main,
-                        backgroundColor: "rgba(0,0,0,0.4)",
+                        backgroundColor: "rgba(0,0,0,0.1)",
                       },
                       "&:hover": {
-                        backgroundColor: "rgba(0,0,0,0.4)",
+                        backgroundColor: "rgba(0,0,0,0.1)",
                         color: theme.palette.secondary.main,
-                        transform: "translateY(-2px)",
                       },
                     }}
                   >
                     {link.label}
                     <ArrowDropDownIcon
-                      sx={{ color: theme.palette.primary.main }}
+                      sx={{ color: theme.palette.primary.main, fontSize: 20 }}
                     />
                   </Button>
+                  {/* Submenu Produtos (desktop) */}
                   <Menu
                     anchorEl={anchorElProducts}
                     open={Boolean(anchorElProducts)}
@@ -290,9 +276,9 @@ const Navbar: FC = () => {
                     transformOrigin={{ vertical: "top", horizontal: "left" }}
                     PaperProps={{
                       sx: {
-                        backgroundColor: "rgba(0,0,0,0.3)",
-                        backdropFilter: "blur(4px)",
-                        boxShadow: "none",
+                        backgroundColor: "#ffffff", // fundo branco
+                        boxShadow: "0px 4px 16px rgba(0,0,0,0.1)",
+                        borderRadius: 0,
                         mt: 0.5,
                       },
                     }}
@@ -303,15 +289,11 @@ const Navbar: FC = () => {
                         component={NavLink}
                         to={sub.to}
                         onClick={handleProductsMenuClose}
-                        sx={{
-                          backgroundColor: "transparent",
-                          "&:hover": { backgroundColor: "rgba(0,0,0,0.4)" },
-                        }}
                       >
                         <ListItemText
                           primary={sub.label}
                           sx={{
-                            fontSize: "1.1rem",
+                            fontSize: "1rem",
                             fontWeight: 400,
                             color: theme.palette.primary.main,
                           }}
