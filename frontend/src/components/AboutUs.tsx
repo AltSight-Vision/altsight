@@ -121,9 +121,9 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
               lineHeight: 1.6,
             }}
           >
-            Fundada em 2015, a <strong>AltSight</strong> nasceu com o propósito
-            de levar inovações em visão computacional para indústrias de
-            diversos setores. Nosso time multidisciplinar combina expertise em
+            A <strong>AltSight</strong> nasceu com o propósito de levar
+            inovações em visão computacional para indústrias de diversos
+            setores. Nosso time multidisciplinar combina expertise em
             aprendizado de máquina, processamento de imagens e desenvolvimento
             de hardware especializado, a fim de entregar soluções robustas e de
             alta performance. Desde o primeiro projeto, buscamos alinhar
@@ -131,13 +131,13 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
             que exigem precisão, velocidade e confiabilidade em ambientes reais.
             <br />
             <br />
-            Ao longo dos anos, já implementamos sistemas de inspeção
-            automatizada, algoritmos de detecção de anomalias em tempo real e
-            plataformas de análise de dados que auxiliam na tomada de decisão.
-            Nossa missão é continuar avançando os limites da tecnologia visual,
-            mantendo sempre o foco na qualidade e na satisfação de nossos
-            clientes. Conheça abaixo os colaboradores que tornam tudo isso
-            possível.
+            Além das soluções voltadas à <strong> visão computacional</strong>,
+            desenvolvemos sistemas para elaboração e{" "}
+            <strong>automação de documentos</strong>, otimizando processos
+            internos e aumentando a eficiência operacional. Nossas ferramentas
+            de análise inteligente de documentos permitem extrair informações
+            relevantes de forma automática, acelerando tomadas de decisão e
+            reduzindo retrabalho em fluxos administrativos complexos.
           </Typography>
         </motion.div>
 
