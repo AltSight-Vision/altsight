@@ -30,7 +30,6 @@ const Home: FC = () => {
   return (
     <>
       <Navbar />
-
       <HeroSection backgroundColor={darkBg} />
       <CompVisionSection backgroundColor={darkBg} />
       <DocAnalisysSection backgroundColor={lightBg} />
