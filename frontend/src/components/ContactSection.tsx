@@ -1,4 +1,4 @@
-// src/components/ContactDemo.tsx
+// src/components/ContactSection.tsx
 import React, { FC, useState } from "react";
 import {
   Box,
@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 
-interface ContactDemoProps {
+interface ContactSectionProps {
   backgroundColor: string;
 }
 
-const ContactDemo: FC<ContactDemoProps> = ({ backgroundColor }) => {
+const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -253,4 +253,4 @@ const ContactDemo: FC<ContactDemoProps> = ({ backgroundColor }) => {
   );
 };
 
-export default React.memo(ContactDemo);
+export default React.memo(ContactSection);
