@@ -16,7 +16,9 @@ interface DocAnalisysSectionProps {
   backgroundColor: string;
 }
 
-const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({ backgroundColor }) => {
+const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({
+  backgroundColor,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -25,7 +27,12 @@ const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({ backgroundColor }) =>
     visible: {
       x: "0%",
       opacity: 1,
-      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8 },
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        duration: 0.8,
+      },
     },
   };
   const imgVariants = {
@@ -33,7 +40,13 @@ const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({ backgroundColor }) =>
     visible: {
       x: "0%",
       opacity: 1,
-      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8, delay: 0.2 },
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        damping: 20,
+        duration: 0.8,
+        delay: 0.2,
+      },
     },
   };
 
@@ -103,11 +116,12 @@ const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({ backgroundColor }) =>
                 textAlign: "justify",
               }}
             >
-              Nosso sistema de <strong>análise de documentos</strong> integra OCR e PLN para
-              extrair informações de PDFs, contratos e relatórios. Detectamos padrões
-              tipográficos e semânticos com redes neurais, identificando <strong>campos-chave</strong>
-              como datas, valores e cláusulas, acelerando fluxos jurídicos, financeiros e
-              administrativos.
+              Nosso sistema de <strong>análise de documentos</strong> integra
+              OCR e PLN para extrair informações de PDFs, contratos e
+              relatórios. Detectamos padrões tipográficos e semânticos com redes
+              neurais, identificando <strong>campos-chave</strong> {" "}
+              como datas, valores e cláusulas, acelerando fluxos jurídicos,
+              financeiros e administrativos.
             </Typography>
             <Button
               component={NavLink}
