@@ -22,18 +22,12 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  // Framer Motion variantes (sem alterações)
   const textVariants = {
     hidden: { x: "-100%", opacity: 0 },
     visible: {
       x: "0%",
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.8,
-      },
+      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8 },
     },
   };
   const formVariants = {
@@ -41,20 +35,13 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
     visible: {
       x: "0%",
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-        duration: 0.8,
-        delay: 0.2,
-      },
+      transition: { type: "spring", stiffness: 120, damping: 20, duration: 0.8, delay: 0.2 },
     },
   };
 
-  const BACKGROUND_COLOR = backgroundColor || "#f0f0f0";
+  const bg = backgroundColor || "#ffffff";
 
   const handleSend = () => {
-    // Integre com sua API de envio de e-mail aqui
     console.log("Email:", email);
     console.log("Assunto:", subject);
     console.log("Mensagem:", message);
@@ -66,24 +53,19 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
   return (
     <Box
       sx={{
-        backgroundColor: BACKGROUND_COLOR,
+        backgroundColor: bg,
         py: { xs: 4, sm: 6, md: 8, lg: 10 },
       }}
     >
       <Box
         sx={{
-          mx: {
-            xs: "5%",
-            sm: "8%",
-            md: "10%",
-            lg: "15%",
-          },
+          mx: { xs: "5%", sm: "8%", md: "10%", lg: "15%" },
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: { xs: "center", md: "flex-start" },
           justifyContent: "space-between",
           gap: { xs: 3, sm: 5, md: 7 },
-          overflow: "hidden",
+          color: theme.palette.text.primary, // texto escuro
         }}
       >
         {/* Texto de introdução */}
@@ -96,14 +78,16 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
           <Box
             sx={{
               textAlign: { xs: "center", md: "left" },
-              mt: { xs: 0, md: 0 },
               maxWidth: { xs: "80vw", sm: "80vw", md: "100%" },
               mx: { xs: "auto", md: 0 },
             }}
           >
             <Typography
               variant={isMobile ? "h5" : "h4"}
-              sx={{ mb: { xs: 2, md: 8 } }}
+              sx={{
+                mb: { xs: 2, md: 8 },
+                color: theme.palette.primary.main, // título primário
+              }}
             >
               <strong>Fale Conosco</strong>
             </Typography>
@@ -111,13 +95,11 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
               variant="body1"
               sx={{
                 mb: { xs: 2, md: 4 },
-                textAlign: { xs: "justify", md: "justify" },
-                color: "#ffffff",
+                textAlign: "justify",
               }}
             >
-              Tem alguma dúvida ou precisa de mais informações? Entre em contato
-              conosco preenchendo o formulário abaixo. Teremos prazer em
-              responder o mais rápido possível e ajudar no que for necessário.
+              Tem alguma dúvida ou precisa de mais informações? Preencha o formulário ao lado e
+              entraremos em contato o mais rápido possível.
             </Typography>
           </Box>
         </motion.div>
@@ -141,62 +123,45 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
               mx: { xs: "auto", md: 0 },
             }}
           >
+            {/** Email **/}
             <TextField
               label="Seu e-mail"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               sx={{
-                width: { xs: "80vw", sm: "80vw", md: "100%" },
-                "& .MuiInputLabel-root": {
-                  color: theme.palette.text.primary,
-                },
+                "& .MuiInputLabel-root": { color: theme.palette.text.primary },
                 "& .MuiOutlinedInput-root": {
                   bgcolor: "#fff",
                   borderRadius: 1,
-                  "& input": {
-                    color: theme.palette.text.primary,
-                  },
-                  "& fieldset": {
-                    borderColor: theme.palette.text.primary,
-                  },
-                  "&:hover fieldset": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: theme.palette.primary.main,
-                  },
+                  "& input": { color: theme.palette.text.primary },
+                  "& fieldset": { borderColor: theme.palette.text.primary },
+                  "&:hover fieldset": { borderColor: theme.palette.primary.main },
+                  "&.Mui-focused fieldset": { borderColor: theme.palette.primary.main },
                 },
               }}
             />
+
+            {/** Assunto **/}
             <TextField
               label="Assunto"
               variant="outlined"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               sx={{
-                width: { xs: "80vw", sm: "80vw", md: "100%" },
-                "& .MuiInputLabel-root": {
-                  color: theme.palette.text.primary,
-                },
+                "& .MuiInputLabel-root": { color: theme.palette.text.primary },
                 "& .MuiOutlinedInput-root": {
                   bgcolor: "#fff",
                   borderRadius: 1,
-                  "& input": {
-                    color: theme.palette.text.primary,
-                  },
-                  "& fieldset": {
-                    borderColor: theme.palette.text.primary,
-                  },
-                  "&:hover fieldset": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: theme.palette.primary.main,
-                  },
+                  "& input": { color: theme.palette.text.primary },
+                  "& fieldset": { borderColor: theme.palette.text.primary },
+                  "&:hover fieldset": { borderColor: theme.palette.primary.main },
+                  "&.Mui-focused fieldset": { borderColor: theme.palette.primary.main },
                 },
               }}
             />
+
+            {/** Mensagem **/}
             <TextField
               label="Mensagem"
               variant="outlined"
@@ -205,28 +170,18 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
               multiline
               minRows={4}
               sx={{
-                width: { xs: "80vw", sm: "80vw", md: "100%" },
-                "& .MuiInputLabel-root": {
-                  color: theme.palette.text.primary,
-                },
+                "& .MuiInputLabel-root": { color: theme.palette.text.primary },
                 "& .MuiOutlinedInput-root": {
                   bgcolor: "#fff",
                   borderRadius: 1,
-                  "& textarea": {
-                    color: theme.palette.text.primary,
-                  },
-                  "& fieldset": {
-                    borderColor: theme.palette.text.primary,
-                  },
-                  "&:hover fieldset": {
-                    borderColor: theme.palette.primary.main,
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: theme.palette.primary.main,
-                  },
+                  "& textarea": { color: theme.palette.text.primary },
+                  "& fieldset": { borderColor: theme.palette.text.primary },
+                  "&:hover fieldset": { borderColor: theme.palette.primary.main },
+                  "&.Mui-focused fieldset": { borderColor: theme.palette.primary.main },
                 },
               }}
             />
+
             <Button
               variant="contained"
               onClick={handleSend}
@@ -254,3 +209,4 @@ const ContactSection: FC<ContactSectionProps> = ({ backgroundColor }) => {
 };
 
 export default React.memo(ContactSection);
+  
