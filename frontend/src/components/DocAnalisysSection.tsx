@@ -1,4 +1,4 @@
-// src/components/CDocAnalisysDemo.tsx
+// src/components/DocAnalisysSection.tsx
 import React, { FC } from "react";
 import {
   Box,
@@ -12,11 +12,11 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import sectionSvg from "../assets/images/document-analysis.svg";
 import { motion } from "framer-motion";
 
-interface CDocAnalisysDemoProps {
+interface DocAnalisysSectionProps {
   backgroundColor: string;
 }
 
-const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
+const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({ backgroundColor }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -37,12 +37,12 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
     },
   };
 
-  const BACKGROUND_COLOR = backgroundColor || "#f0f0f0";
+  const bg = backgroundColor || "#ffffff";
 
   return (
     <Box
       sx={{
-        backgroundColor: BACKGROUND_COLOR,
+        backgroundColor: bg,
         py: { xs: 4, sm: 6, md: 8, lg: 10 },
       }}
     >
@@ -54,10 +54,10 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
           alignItems: "center",
           justifyContent: "space-between",
           gap: { xs: 3, sm: 5, md: 7 },
-          color: "#fff",
+          color: theme.palette.text.primary,
         }}
       >
-        {/* SVG */}
+        {/* SVG animado */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -90,14 +90,24 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
               mx: { xs: "auto", md: 0 },
             }}
           >
-            <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: { xs: 2, md: 4 } }}>
+            <Typography
+              variant={isMobile ? "h5" : "h4"}
+              sx={{ mb: { xs: 2, md: 4 }, color: theme.palette.primary.main }}
+            >
               <strong>Análise de Documentos</strong>
             </Typography>
-            <Typography variant="body1" sx={{ mb: { xs: 2, md: 4 }, textAlign: "justify" }}>
-              Nosso sistema de <strong>análise de documentos</strong> integra OCR e PLN para extrair
-              informações de PDFs, contratos e relatórios. Detectamos padrões tipográficos e
-              semânticos com redes neurais, identificando <strong>campos-chave</strong> como datas,
-              valores e cláusulas, acelerando fluxos jurídicos, financeiros e administrativos.
+            <Typography
+              variant="body1"
+              sx={{
+                mb: { xs: 2, md: 4 },
+                textAlign: "justify",
+              }}
+            >
+              Nosso sistema de <strong>análise de documentos</strong> integra OCR e PLN para
+              extrair informações de PDFs, contratos e relatórios. Detectamos padrões
+              tipográficos e semânticos com redes neurais, identificando <strong>campos-chave</strong>
+              como datas, valores e cláusulas, acelerando fluxos jurídicos, financeiros e
+              administrativos.
             </Typography>
             <Button
               component={NavLink}
@@ -107,14 +117,12 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
                 px: { xs: 2, sm: 3, md: 4 },
                 py: { xs: 0.6, sm: 1, md: 1.5 },
                 color: "#fff",
-                bgcolor: "rgba(255,255,255,0.1)",
-                backdropFilter: "blur(6px)",
+                bgcolor: theme.palette.primary.main,
                 borderRadius: "12px",
-                transition: "transform 0.3s ease, background-color 0.3s ease",
+                transition: "background-color 0.3s ease, transform 0.3s ease",
                 "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.2)",
+                  backgroundColor: theme.palette.primary.dark,
                   transform: "translateX(8px)",
-                  boxShadow: "0 6px 12px rgba(0,0,0,0.3)",
                 },
                 display: "inline-flex",
                 alignItems: "center",
@@ -129,4 +137,4 @@ const CDocAnalisysDemo: FC<CDocAnalisysDemoProps> = ({ backgroundColor }) => {
   );
 };
 
-export default React.memo(CDocAnalisysDemo);
+export default React.memo(DocAnalisysSection);
