@@ -16,37 +16,37 @@ const theme = createTheme({
 
     // fundo clarinho para destacar o primário
     background: {
-      default: "#f0f8fd",  // tom suave de azul-claro
-      paper: "#ffffff",    // branco para componentes
+      default: "#f0f8fd", // tom suave de azul-claro
+      paper: "#ffffff", // branco para componentes
     },
 
     // texto escuro, mas com um toque de azul-escuro
     text: {
-      primary: "#023047",            // quase marinho
+      primary: "#023047", // quase marinho
       secondary: "rgba(2, 48, 71, 0.7)", // mesma base, 70% de opacidade
     },
 
     // cores de status em tons que casam com o azul/ciano
     error: {
-      main: "#d32f2f",      // vermelho ligeiramente inclinado ao marrom
+      main: "#d32f2f", // vermelho ligeiramente inclinado ao marrom
       contrastText: "#ffffff",
     },
     warning: {
-      main: "#f9a825",      // amarelo-ouro
+      main: "#f9a825", // amarelo-ouro
       contrastText: "#000000",
     },
     info: {
-      main: "#29b6f6",      // azul-claro vibrante
+      main: "#29b6f6", // azul-claro vibrante
       contrastText: "#000000",
     },
     success: {
-      main: "#66bb6a",      // verde claro
+      main: "#66bb6a", // verde claro
       contrastText: "#ffffff",
     },
   },
 
   typography: {
-    fontFamily: `"Exo 2", sans-serif`,
+    fontFamily: `"Poppins", sans-serif`,
 
     h4: {
       fontWeight: 800,
