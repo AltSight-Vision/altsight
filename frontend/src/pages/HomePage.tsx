@@ -33,13 +33,9 @@ const Home: FC = () => {
 
       <HeroSection backgroundColor={darkBg} />
       <CompVisionSection backgroundColor={darkBg} />
-
-      <TransitionBar from={darkBg} to={lightBg} />
       <DocAnalisysSection backgroundColor={lightBg} />
-
-      <TransitionBar from={lightBg} to={darkBg} />
       <AboutUs backgroundColor={darkBg} />
-      <ContactSection backgroundColor={darkBg} />
+      <ContactSection backgroundColor={lightBg} />
 
       <Footer />
     </>
