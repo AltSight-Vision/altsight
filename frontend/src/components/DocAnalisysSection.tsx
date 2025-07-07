@@ -70,24 +70,6 @@ const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({
           color: theme.palette.text.primary,
         }}
       >
-        {/* SVG animado */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={imgVariants}
-          style={{ flex: 1, display: "flex", justifyContent: "center" }}
-        >
-          <Box
-            component="img"
-            src={sectionSvg}
-            alt="Fluxo de análise de documento"
-            sx={{
-              width: { xs: "80vw", sm: 180, md: 280, lg: 360 },
-              height: "auto",
-            }}
-          />
-        </motion.div>
-
         {/* Texto + botão */}
         <motion.div
           initial="hidden"
@@ -119,9 +101,9 @@ const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({
               Nosso sistema de <strong>análise de documentos</strong> integra
               OCR e PLN para extrair informações de PDFs, contratos e
               relatórios. Detectamos padrões tipográficos e semânticos com redes
-              neurais, identificando <strong>campos-chave</strong> {" "}
-              como datas, valores e cláusulas, acelerando fluxos jurídicos,
-              financeiros e administrativos.
+              neurais, identificando <strong>campos-chave</strong> como datas,
+              valores e cláusulas, acelerando fluxos jurídicos, financeiros e
+              administrativos.
             </Typography>
             <Button
               component={NavLink}
@@ -145,6 +127,23 @@ const DocAnalisysSection: FC<DocAnalisysSectionProps> = ({
               Saiba Mais
             </Button>
           </Box>
+        </motion.div>
+        {/* SVG animado */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={imgVariants}
+          style={{ flex: 1, display: "flex", justifyContent: "center" }}
+        >
+          <Box
+            component="img"
+            src={sectionSvg}
+            alt="Fluxo de análise de documento"
+            sx={{
+              width: { xs: "80vw", sm: 180, md: 280, lg: 360 },
+              height: "auto",
+            }}
+          />
         </motion.div>
       </Box>
     </Box>
