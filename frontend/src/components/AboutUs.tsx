@@ -28,7 +28,7 @@ const collaborators: Collaborator[] = [
   {
     name: "Vitor Custódio Chagas",
     knowledge:
-      "Engenheiro de Visão Computacional — especialistas em processamento de imagens e estimação de profundidade; proficiente em Python e PyTorch.",
+      "Engenheiro de Visão Computacional — especialista em processamento da dados 3D e desenvolvimento de inteligência artificial para sistemas embarcados",
     avatarSrc: avatarVitor,
   },
   {
