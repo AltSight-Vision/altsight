@@ -1,118 +1,102 @@
-````markdown
-# AltSight · Visão Computacional para Agrotech
+# AltSight · Visão Computacional
 
-> **AltSight** é uma plataforma React+TypeScript que oferece soluções de visão computacional para o setor de agrotech. O front-end é escrito em TypeScript, empacotado com Node.js e hospedado no Firebase Hosting.
-
----
-
-## 📦 Tecnologias
-
-- **React** + **TypeScript** (TSX)
-- **Node.js** (v16+)
-- **Firebase Hosting** (via Firebase CLI)
-- **React Router** para navegação
-- **CSS Modules** / estilos globais
-- **React Icons** (`react-icons/fa`, `react-icons/md`)
+Front-end desenvolvido em React com TypeScript, voltado para soluções de visão computacional no setor agrotech. O projeto é hospedado no Firebase Hosting e utiliza Firebase CLI para deploy.
 
 ---
 
-## 🚀 Pré-requisitos
+## O que você precisa instalar
 
-- **Node.js** (v16 ou superior) e **npm** (v8+)
-- **Firebase CLI**
-  ```bash
-  npm install -g firebase-tools
-  ```
-````
+1. **Node.js 22.18**  
+   É obrigatório usar essa versão. Versões diferentes podem causar falhas no build.  
+   Baixe em: https://nodejs.org/
 
-- Conta Firebase com projeto criado e Hosting habilitado
+2. **Firebase CLI**  
+   Instale globalmente com o comando:
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+3. Acesso ao projeto Firebase da Altsight  
+   Você precisa estar com permissão no projeto Firebase. Caso contrário, peça ao time para adicionar sua conta.
 
 ---
 
-## 🎯 Instalação e desenvolvimento local
+## Como rodar localmente
 
-1. Clone este repositório:
+Passos para configurar e executar o projeto:
 
-   ```bash
-   git clone https://github.com/notNilton/altsight-landingpage.git
-   cd altsight
-   ```
+```bash
+git clone https://github.com/notNilton/altsight-landingpage.git
+cd altsight
 
-2. Instale as dependências:
+npm install
 
-   ```bash
-   npm install
-   ```
+npm run dev
+```
 
-3. Rode em modo de desenvolvimento:
-
-   ```bash
-   npm run dev
-   ```
-
-   > O servidor de dev abrirá em `http://localhost:5173` (ou porta configurada).
-
-4. Acesse a aplicação no navegador e faça mudanças em tempo real.
+O servidor de desenvolvimento será iniciado. Acesse no navegador: `http://localhost:5173`
 
 ---
 
-## 🛠️ Scripts disponíveis
+## Como fazer deploy
 
-| Comando          | Descrição                                               |
-| ---------------- | ------------------------------------------------------- |
-| `npm run dev`    | Inicia o servidor de desenvolvimento (Hot-reload)       |
-| `npm run build`  | Gera uma build otimizada em `dist/`                     |
-| `npm run serve`  | Serve localmente a pasta de produção (`dist/`)          |
-| `npm run lint`   | Executa linter (ESLint + Prettier)                      |
-| `npm run test`   | Roda testes unitários (caso configurados)               |
-| `npm run deploy` | Faz deploy para Firebase Hosting (após `npm run build`) |
+Antes de fazer deploy, é obrigatório estar logado com uma conta autorizada no projeto Firebase.
 
----
+### 1. Faça login no Firebase CLI
+```bash
+firebase login
+```
+Use uma conta que tenha acesso ao projeto Altsight.
 
-## ⚙️ Configuração do Firebase
+### 2. Crie um .env copiando do .env.example
 
-1. Faça login no Firebase CLI:
-   ```bash
-   firebase login
-   ```
-2. Aponte para o seu projeto Firebase:
-   ```bash
-   firebase use --add
-   ```
-3. Verifique se o `firebase.json` contém:
-   ```jsonc
-   {
-     "hosting": {
-       "public": "dist",
-       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-       "rewrites": [
-         {
-           "source": "**",
-           "destination": "/index.html"
-         }
-       ]
-     }
-   }
-   ```
-4. Após `npm run build`, faça deploy:
-   ```bash
-   firebase deploy --only hosting
-   ```
+Copie do SDK do firebase console as informações necessárias para o .env, por exemplo:
+
+```env
+VITE_FIREBASE_API_KEY=AIzaSyDxMp5m1234567890AbCdEfGhIjKlMnOpQ
+VITE_FIREBASE_AUTH_DOMAIN=altsight-dev-12345.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=altsight-dev-12345
+VITE_FIREBASE_STORAGE_BUCKET=altsight-dev-12345.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=20345678901
+VITE_FIREBASE_APP_ID=1:20345678901:web:c7d6e5f4a3b2c1d0e9f8a7b6
+```
+
+
+### 3. Execute o deploy
+```bash
+npm run deploy
+```
+
+Esse comando executa:
+- `npm run build`: gera os arquivos estáticos na pasta `dist`
+- `firebase deploy --only hosting`: envia os arquivos para o Firebase Hosting
 
 ---
 
-## 🤝 Contribuição
+## Estrutura básica
 
-1. Faça um _fork_ deste repositório.
-2. Crie uma branch feature:
-   ```bash
-   git checkout -b feature/nova-funcionalidade
-   ```
-3. Commit suas alterações e faça _push_:
-   ```bash
-   git commit -m "feat: adicionar nova funcionalidade X"
-   git push origin feature/nova-funcionalidade
-   ```
-4. Abra um Pull Request descrevendo suas mudanças.
+- `src/` – código-fonte da aplicação (React + TypeScript)
+- `dist/` – pasta gerada pelo build (não deve ser commitada)
+- `firebase.json` – configuração do Firebase Hosting (modifique apenas com autorização)
 
 ---
+
+## Scripts disponíveis
+
+| Comando         | Descrição                                  |
+|-----------------|--------------------------------------------|
+| npm run dev     | Inicia o servidor de desenvolvimento       |
+| npm run build   | Gera a versão de produção                  |
+| npm run serve   | Serve localmente a versão de produção      |
+| npm run lint    | Executa análise de código (ESLint)         |
+| npm run deploy  | Faz build e envia para o Firebase Hosting  |
+
+---
+
+## Regras para contribuição
+
+- Não altere `firebase.json` sem consultar o gerenciador do sistema.
+- Nunca adicione `node_modules` ou `dist/` ao controle de versão.
+- Qualquer mudança em `master` deve ser feita via Pull Request.
+- Teste localmente antes de submeter código.
+- Se o deploy falhar, avise imediatamente o gerenciador do sistema.
