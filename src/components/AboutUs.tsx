@@ -7,7 +7,6 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { motion } from "framer-motion";
 
 // Importação dos avatares
 import avatarVitor from "../assets/images/avatars/avatar-vitor.png";
@@ -20,7 +19,7 @@ interface AboutUsProps {
 
 interface Collaborator {
   name: string;
-  knowledge: string; // antes era `role`
+  knowledge: string;
   avatarSrc: string;
 }
 
@@ -49,42 +48,33 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const textVariants = {
-    hidden: { y: "-100%", opacity: 0 },
-    visible: {
-      y: "0%",
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 0.6,
-      },
-    },
-  };
-
-  const avatarsVariants = {
-    hidden: { y: "20%", opacity: 0 },
-    visible: {
-      y: "0%",
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 0.6,
-        delay: 0.2,
-      },
-    },
-  };
-
   const BACKGROUND_COLOR = backgroundColor || "#fafafa";
+
+  // Animações com CSS puro
+  const fadeIn = {
+    animation: "fadeIn 0.8s ease-in forwards",
+  };
+
+  const fadeInWithDelay = {
+    animation: "fadeIn 0.8s ease-in 0.3s forwards",
+  };
 
   return (
     <Box
       sx={{
         backgroundColor: BACKGROUND_COLOR,
         py: { xs: 4, sm: 6, md: 8 },
+        // Define a animação global
+        "@keyframes fadeIn": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(20px)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+        },
       }}
     >
       <Box
@@ -98,11 +88,12 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
           textAlign: "center",
         }}
       >
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={textVariants}
-          style={{ width: "100%" }}
+        {/* Texto */}
+        <Box
+          sx={{
+            ...fadeIn,
+            width: "100%",
+          }}
         >
           <Typography
             variant={isMobile ? "h5" : "h4"}
@@ -139,13 +130,14 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
             relevantes de forma automática, acelerando tomadas de decisão e
             reduzindo retrabalho em fluxos administrativos complexos.
           </Typography>
-        </motion.div>
+        </Box>
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={avatarsVariants}
-          style={{ width: "100%" }}
+        {/* Avatares */}
+        <Box
+          sx={{
+            ...fadeInWithDelay,
+            width: "100%",
+          }}
         >
           <Box
             sx={{
@@ -169,8 +161,8 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
                   src={col.avatarSrc}
                   alt={col.name}
                   sx={{
-                    width: isMobile ? 100 : 140, // aumentado
-                    height: isMobile ? 100 : 140, // aumentado
+                    width: isMobile ? 100 : 140,
+                    height: isMobile ? 100 : 140,
                     mb: 1,
                   }}
                 />
@@ -189,7 +181,7 @@ const AboutUs: FC<AboutUsProps> = ({ backgroundColor }) => {
               </Box>
             ))}
           </Box>
-        </motion.div>
+        </Box>
       </Box>
     </Box>
   );
