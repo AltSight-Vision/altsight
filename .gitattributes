@@ -1,0 +1,40 @@
+# Garante que quebras de linha sejam consistentes
+* text=auto eol=lf
+
+# Arquivos específicos que devem ser tratados como texto
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+*.json text
+*.html text
+*.css text
+*.scss text
+*.md text
+*.yaml text
+*.yml text
+*.env text
+
+# Evita alterações em arquivos binários
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.webp binary
+
+# Garante que nomes de arquivos sejam tratados com case-sensitive
+# (Importante para Linux, onde foo.js ≠ Foo.js)
+* -crlf -diff -merge
+
+# Evita problemas com encoding (UTF-8 obrigatório)
+*.js text working-tree-encoding=UTF-8
+*.jsx text working-tree-encoding=UTF-8
+*.ts text working-tree-encoding=UTF-8
+*.tsx text working-tree-encoding=UTF-8
+*.json text working-tree-encoding=UTF-8
+*.html text working-tree-encoding=UTF-8
+*.css text working-tree-encoding=UTF-8
+*.md text working-tree-encoding=UTF-8
+*.env text working-tree-encoding=UTF-8
