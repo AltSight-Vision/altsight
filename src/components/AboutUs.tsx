@@ -30,12 +30,12 @@ const collaborators: Collaborator[] = [
       "Engenheiro de Visão Computacional — especialista em processamento da dados 3D e desenvolvimento de inteligência artificial para sistemas embarcados",
     avatarSrc: avatarVitor,
   },
-  {
-    name: "Felipe Manfio Barbosa",
-    knowledge:
-      "MSc em Ciência da Computação (ICMC-USP) — pesquisador em Deep Learning e Visão Computacional; foco em segmentação e depth estimation.",
-    avatarSrc: avatarFelipe,
-  },
+  // {
+  //   name: "Felipe Manfio Barbosa",
+  //   knowledge:
+  //     "MSc em Ciência da Computação (ICMC-USP) — pesquisador em Deep Learning e Visão Computacional; foco em segmentação e depth estimation.",
+  //   avatarSrc: avatarFelipe,
+  // },
   {
     name: "George de Borbas Nardes",
     knowledge:

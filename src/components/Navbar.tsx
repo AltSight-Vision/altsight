@@ -19,7 +19,7 @@ import mobileLogo from "../assets/logos/logo-mobile.svg";
 const NAV_LINKS = [
   { label: "Início", to: "/" },
   { label: "Visão Computacional", to: "/products/comp-vision" },
-  { label: "Visão Analitica", to: "/products/vision-analitics" },
+  // { label: "Visão Analitica", to: "/products/vision-analitics" },
   { label: "Análise de Documentos", to: "/products/doc-analisys" },
 ];
 
