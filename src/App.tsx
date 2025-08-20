@@ -14,6 +14,7 @@ import HomePage from "./pages/HomePage";
 
 import CompVisionPage from "./pages/CompVisionPage";
 import DocAnalisysPage from "./pages/DocAnalisysPage";
+import VisionAnalitics from "./pages/VisionAnalitics";
 
 const App: FC = () => {
   return (
@@ -46,6 +47,10 @@ const App: FC = () => {
               <Route
                 path="/products/comp-vision"
                 element={<CompVisionPage />}
+              />
+              <Route
+                path="/products/vision-analitics"
+                element={<VisionAnalitics />}
               />
               <Route
                 path="/products/doc-analisys"
